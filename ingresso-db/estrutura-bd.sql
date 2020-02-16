@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     nome TEXT NOT NULL,
     data_nascimento DATE NOT NULL,
     senha TEXT NOT NULL,
+    email TEXT NOT NULL,
     cpf TEXT NOT NULL UNIQUE,
     endereco TEXT,
     admin BIT DEFAULT 0
@@ -69,3 +70,7 @@ CREATE TABLE IF NOT EXISTS ingresso (
     FOREIGN KEY (usuario_id) REFERENCES usuario(id),
     UNIQUE (sessao_id, poltrona)
 );
+
+INSERT INTO tipo_ingresso (id, nome, preco, observacao) VALUES (1, 'Ingresso individual', 10.50, 'Ingresso normal avulso');
+INSERT INTO tipo_ingresso (id, nome, preco, observacao) VALUES (2, 'Ingresso familia', 35.99, 'Ingresso para toda a fámilia. Válido para 2 adultos e 2 crianças');
+INSERT INTO tipo_ingresso (id, nome, preco, observacao) VALUES (3, 'Ingresso casal', 16.70, 'Ingresso para os amantes. Válido para 2 pessoas');
