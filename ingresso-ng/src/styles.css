@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: Arvo;
+    src: url(assets/fonts/Arvo-Regular.ttf);
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Arvo;
+    src: url(assets/fonts/Arvo-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Arvo;
+    src: url(assets/fonts/Arvo-BoldItalic.ttf);
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Arvo;
+    src: url(assets/fonts/Arvo-Italic.ttf);
+    font-style: italic;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.font-arvo {
+    font-family: Arvo;
+}
+
+.bg-35363A {
+    background-color: #35363A;
+}
+
+.raised-button {
+    background-color: #b3414b;
+    color: #FFF!important;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .7);
+    border-radius: 0px;
+}
+
+.raised-button:hover, .rounded-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.1s ease;
+}
+
+.rounded-button {
+    background-color: #b3414b;
+    color: #FFF!important;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .7);
+    border-radius: 30px;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+}
