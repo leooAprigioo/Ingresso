@@ -2,7 +2,7 @@ import sqlite3
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from usuario import usuario_app, usuario_db
-
+from filme import filme_app, filme_db
 
 
 
@@ -14,6 +14,7 @@ database = {
 
 app = Flask(__name__)
 app.register_blueprint(usuario_app)
+app.register_blueprint(filme_app)
 CORS(app)
 
 def add_cors_headers(response):
