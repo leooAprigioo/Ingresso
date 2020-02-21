@@ -1,0 +1,17 @@
+/* poster */
+.poster {
+    width: 13rem; height: 15rem;
+    
+}
+
+.list-arrow {
+    position: absolute;
+    top: 15rem;
+    right: 0;
+    color: #b3414b;
+    cursor: pointer;
+}
+
+.list-arrow: ~ .poster {
+    transform: translateX(-10rem);
+}

@@ -1,0 +1,10 @@
+
+header .logo img {
+    width: 100%;
+}
+
+.navbar-nav li a:hover {
+    transform: scale(1.05);
+    transition: transform 0.1s ease;
+    color: #b3414b;
+}
