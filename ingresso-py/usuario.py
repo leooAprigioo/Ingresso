@@ -25,13 +25,8 @@ def listar():
      with closing(conectar()) as con, closing(con.cursor()) as cur:
         cur.execute("SELECT * FROM usuario")
         con.commit()
-        acabou=False
-        while not acabou:
-            rows = cur.fetchmany(200)
-            acabou = (len(rows) == 0)
-            dict = rows_to_dict(cur.description, rows)
-
-            return jsonify(dict)
+        dict = rows_to_dict(cur.description, cur.fetchall())
+        return jsonify(dict)
       
     
 @usuario_app.route('/usuario/<int:id>', methods=['GET'])
@@ -40,47 +35,49 @@ def localizar(id):
         cur.execute("SELECT * FROM usuario  WHERE id = ?",(id,))
         con.commit()
         lista = rows_to_dict(cur.description, cur.fetchall())
+        if (lista==[]):
+             return jsonify({'Mensagem': 'Nenhum usuario com esse ID'}),400
         return jsonify(lista)
   
 
 @usuario_app.route('/usuario/criar', methods=['POST'])
 def criar():
-    listaRetorno={}
     dados = request.get_json()
     with closing(conectar()) as con, closing(con.cursor()) as cur:
-        acabou=False
-        while not acabou:
-            if not validar_campos(dados,campos,tipos):
-                return jsonify({'erro':'valor(es) inválido(s)'}),422
+        if not validar_campos(dados,campos,tipos):
+            return jsonify({'erro':'valor(es) inválido(s)'}),422
+        try:
             cur.execute("Insert into usuario (nome,data_nascimento,senha,cpf,endereco,admin)values(?,?,?,?,?,?)",(dados['nome'],dados['data_nascimento'],dados['senha'],dados['cpf'],dados['endereco'],dados['admin'],))
             con.commit()
-            if status==200:
-                listaRetorno={"Mensagem":"Criado com sucesso","Status_Code":200}
-                
-            else:
-                listaRetorno={"Mensagem":"Erro ao crirar","Status_Code":201}
-                return listaRetorno
-
+            return jsonify({'Mensagem':'sucesso'}),200                
+        except Exception as inst:
+            return jsonify({'Mensagem': inst.args}),400
 
 @usuario_app.route('/usuario/update/<int:id>', methods=['PUT'])
 def update(id):
     dados = request.get_json()
-
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         if not validar_campos(dados,campos2,tipos2):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
-        cur.execute("UPDATE usuario set nome=?,data_nascimento=?,senha=?,cpf=?,endereco=?,admin=? where id=?",(dados["nome"],dados['data_nascimento'],dados['senha'],dados['cpf'],dados["endereco"],dados['admin'],id,))
-        con.commit()
-        return localizar(id)
+        try:
+            cur.execute("UPDATE usuario set nome=?,data_nascimento=?,senha=?,cpf=?,endereco=?,admin=? where id=?",(dados["nome"],dados['data_nascimento'],dados['senha'],dados['cpf'],dados["endereco"],dados['admin'],id,))
+            con.commit()
+            return jsonify({'Mensagem':'sucesso'}),200                
+        except Exception as inst:
+            return jsonify({'Mensagem': inst.args}),400
     
 @usuario_app.route('/usuario/delete/<int:id>', methods=['POST'])
 def delete(id):
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         if not (type(id)):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
-        cur.execute("delete from usuario where id=?",(id,))
-        con.commit()
-        return 'sucesso'
+        else:
+            try:
+                cur.execute("delete from usuario where id=?",(id,))
+                con.commit()
+                return jsonify({'Mensagem':'sucesso'}),200                
+            except Exception as inst:
+                return jsonify({'Mensagem': inst.args}),400
     
 
 

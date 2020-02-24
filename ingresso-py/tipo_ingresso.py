@@ -26,13 +26,8 @@ def listar():
      with closing(conectar()) as con, closing(con.cursor()) as cur:
         cur.execute("SELECT * FROM tipo_ingresso")
         con.commit()
-        acabou=False
-        while not acabou:
-            rows = cur.fetchmany(200)
-            acabou = (len(rows) == 0)
-            dict = rows_to_dict(cur.description, rows)
-
-            return jsonify(dict)
+        dict = rows_to_dict(cur.description, cur.fetchall())
+        return jsonify(dict)
       
   
 @tipo_ingresso_app.route('/tipo_ingresso/<int:id>', methods=['GET'])
@@ -43,51 +38,33 @@ def localizar(id):
         lista = rows_to_dict(cur.description, cur.fetchall())
         return jsonify(lista)
   
-'''
-@tipo_ingresso_app.route('/filme/criar', methods=['POST'])
-def criar():
-    listaRetorno={}
-    dados = request.get_json()
-    with closing(conectar()) as con, closing(con.cursor()) as cur:
-        acabou=False
-        while not acabou:
-            if not validar_campos(dados,campos,tipos):
-                return jsonify({'erro':'valor(es) inválido(s)'}),422
-                cur.execute("Insert into filme (titulo,data_lancamento,ano,duracao,genero,diretor,atores,sinopse,classificacao,idioma,pais,poster,imdb)values(?,?,?,?,?,?,?,?,?,?,?,?,?)",(dados['titulo'],dados['data_lancamento'],dados['ano'],dados['duracao'],dados['genero'],dados['diretor'],dados['atores'],dados['sinopse'],dados['classificacao'],dados['idioma'],dados['pais'],dados['poster'],dados['imdb'],))
-            con.commit()
-            if status==200:
-                listaRetorno={"Mensagem":"Criado com sucesso","Status_Code":200}
-                
-            else:
-                listaRetorno={"Mensagem":"Erro ao crirar","Status_Code":201}
-                return listaRetorno
-'''
+
 @tipo_ingresso_app.route('/tipo_ingresso/criar', methods=['POST'])
 def criar():
-    listaRetorno={}
     dados = request.get_json()
     with closing(conectar()) as con, closing(con.cursor()) as cur:
-        acabou=False
-        while not acabou:
-            if not validar_campos(dados,campos,tipos):
-               return jsonify({'erro':'valor(es) inválido(s)'}),422
-            try:
-                cur.execute("Insert into tipo_ingresso (nome,preco,observacao)values(?,?,?)",(dados['nome'],dados['preco'],dados['observacao'],))
-                con.commit()
-                return jsonify({'Mensagem':'sucesso'}),200                
-            except Exception as inst:
-                return jsonify({'Mensagem': inst.args}),400
+        if not validar_campos(dados,campos,tipos):
+            return jsonify({'erro':'valor(es) inválido(s)'}),422
+        try:
+            cur.execute("Insert into tipo_ingresso (nome,preco,observacao)values(?,?,?)",(dados['nome'],dados['preco'],dados['observacao'],))
+            con.commit()
+            return jsonify({'Mensagem':'sucesso'}),200                
+        except Exception as inst:
+            return jsonify({'Mensagem': inst.args}),400
 
 @tipo_ingresso_app.route('/tipo_ingresso/update/<int:id>', methods=['PUT'])
 def update(id):
     dados = request.get_json()
-
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         if not validar_campos(dados,campos,tipos):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
-        cur.execute("UPDATE tipo_ingresso set nome=?,preco=?,observacao=? where id=?",(dados['nome'],dados['preco'],dados['observacao'],id,))
-        con.commit()
-        return localizar(id)
+        try:
+            cur.execute("UPDATE tipo_ingresso set nome=?,preco=?,observacao=? where id=?",(dados['nome'],dados['preco'],dados['observacao'],id,))
+            con.commit()
+            return jsonify({'Mensagem':'sucesso'}),200                
+        except Exception as inst:
+            return jsonify({'Mensagem': inst.args}),400
+
 
 
 @tipo_ingresso_app.route('/tipo_ingresso/delete/<int:id>', methods=['POST'])
@@ -95,9 +72,12 @@ def delete(id):
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         if not (type(id)):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
-        cur.execute("delete from tipo_ingresso where id=?",(id,))
-        con.commit()
-        return 'sucesso'
+        try:
+            cur.execute("delete from tipo_ingresso where id=?",(id,))
+            con.commit()
+            return jsonify({'Mensagem':'sucesso'}),200                
+        except Exception as inst:
+            return jsonify({'Mensagem': inst.args}),400
     
 
 

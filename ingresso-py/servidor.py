@@ -11,7 +11,15 @@ from ingresso import ingresso_app, ingresso_db
 
 
 database = {
-        "usuario":usuario_db    
+        "usuario":usuario_db,
+        "filme":filme_db,
+        "sala":sala_db,
+        "telefone":telefone_db,
+        "sessoa":sessao_db,
+        "tipo_ingresso":tipo_ingresso_db,
+        "ingresso":ingresso_db,
+            
+
 }
 
 app = Flask(__name__)
