@@ -9,10 +9,13 @@ CREATE TABLE IF NOT EXISTS filme (
     atores TEXT NOT NULL,
     sinopse TEXT NOT NULL,
     classificacao TINYINT NOT NULL,
+    em_cartaz BIT DEFAULT 0,
     idioma TEXT,
     pais TEXT,
-    poster TEXT,
     imdb TINYINT
+    poster TEXT,
+    banner TEXT,
+    trailer_url TEXT
 );
 
 CREATE TABLE IF NOT EXISTS sala (
