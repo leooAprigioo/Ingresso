@@ -13,7 +13,7 @@ export class MovieListComponent implements OnInit {
   @Input() title: string;
   @Input() movies: Filme[];
 
-  carouselItemSize = 5;
+  carouselItemSize = 7;
 
   faChevronRight = faChevronRight;
 

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';;
 
 import { NavbarModule } from './components/navbar/navbar.module';
 import { MoviesModule } from './pages/movies/movies.module';
+import { FooterModule } from './components/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MoviesModule } from './pages/movies/movies.module';
     BrowserModule,
     AppRoutingModule,
     NavbarModule,
-    MoviesModule
+    MoviesModule,
+    FooterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
