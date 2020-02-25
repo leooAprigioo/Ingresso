@@ -1,0 +1,12 @@
+<div class="d-inline-block mx-3 my-2 poster">
+    <a href="#" class="d-block position-relative"><img [src]="movie.poster" />
+        <span class="poster-title">{{ movie.titulo }}</span>
+        <span class="poster-play">
+            <fa-icon [icon]="faPlay" class="pr-2 text-white" size='2x'></fa-icon>
+        </span>
+        <app-advisory-rating [advisoryRating]="movie.classificacao" class="advisory-rating"></app-advisory-rating>
+        <!-- <span class="poster-trailer">
+            <iframe [src]="getTrailerUrl()" modestbranding="1" color="white" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </span> -->
+    </a>
+</div>

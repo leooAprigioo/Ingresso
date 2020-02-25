@@ -1,0 +1,31 @@
+.green-advisory{
+    background-color: #00b150;
+}
+
+.blue-advisory{
+    background-color: #00cdff;
+}
+
+.yellow-advisory{
+    background-color: #ffcc00;
+}
+
+.orange-advisory{
+    background-color: #ff6600;
+}
+
+.red-advisory{
+    background-color: #fe0000;
+}
+
+.black-advisory{
+    background-color: #000000;
+}
+
+.brand {
+    display: inline-block;
+    width:33px;
+    height: 33px;
+    text-align: center;
+    vertical-align: middle;
+}
