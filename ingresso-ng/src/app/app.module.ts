@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';;
 import { NavbarModule } from './components/navbar/navbar.module';
 import { MoviesModule } from './pages/movies/movies.module';
 import { FooterModule } from './components/footer/footer.module';
+import { MovieDetailModule } from './pages/movie-detail/movie-detail.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { FooterModule } from './components/footer/footer.module';
     AppRoutingModule,
     NavbarModule,
     MoviesModule,
+    MovieDetailModule,
     FooterModule
   ],
   providers: [],
