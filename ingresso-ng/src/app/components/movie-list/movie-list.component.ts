@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
-import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Filme } from 'src/app/models/filme';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,11 +10,30 @@ import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons';
 })
 export class MovieListComponent implements OnInit {
 
-  faArrowCircleRight = faArrowCircleRight;
+  @Input() title: string;
+  @Input() movies: Filme[];
+
+  carouselItemSize = 7;
+
+  faChevronRight = faChevronRight;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  getMoviesInSplit() {
+    return this.splitMovies()
+  }
+
+  splitMovies() {
+    let splited = [];
+    let index = 0;
+    while (index < this.movies.length) {
+      splited.push(this.movies.slice(index, index + this.carouselItemSize));
+      index += this.carouselItemSize;
+    }
+    return splited;
   }
 
 }
