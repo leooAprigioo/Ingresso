@@ -1,0 +1,33 @@
+.session-date-item:active {
+    border-bottom: solid 2px #FFF;
+}
+
+.session-date {
+    max-width: fit-content;
+    cursor: pointer;
+}
+
+.session-date:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+.session-arrow-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.session {
+    border-width: 2px!important;
+    border-color: #b3414b!important;
+    text-decoration: none;
+}
+
+.session:hover {
+    color: #b3414b;
+    transform: translateX(10px);
+    transition: all 0.2s ease;
+}

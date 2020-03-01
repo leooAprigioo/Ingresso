@@ -3,17 +3,17 @@
         <h3>{{ title }}</h3>
         <button class="btn rounded-button my-3">Ver todos</button>
     </div>
-    <div class="col-12 pl-0">
-
-        <div [id]="'listOfFilmesCarousel' + title.replace(' ', '')" class="carousel slide" data-ride="carousel" data-interval="false">
-            <div class="carousel-inner">
-              <div class="carousel-item" *ngFor="let movieList of getMoviesInSplit(); let i = index" [ngClass]="i === 0 ? 'active' : ''">
-                <app-movie-poster *ngFor="let movie of movieList" [movie]="movie"></app-movie-poster>
-              </div>
-            </div>
-            <a class="carousel-control-next" [href]="'#listOfFilmesCarousel' + title.replace(' ', '')" role="button" data-slide="next">
-                <fa-icon [icon]="faChevronRight" class="pr-2 text-b3414b" size='3x'></fa-icon>
-            </a>
-          </div>
+</section>
+<section class="row" #movieListElement>
+  <div class="col-12">
+    <div class="row flex-nowrap overflow-hidden no-gutters">
+      <div class="col-2" *ngFor="let movie of movies; let i = index" [ngStyle]="{'transform': 'translateX(' + moved + 'px)'}" #posterElement>
+        <app-movie-poster [movie]="movie"></app-movie-poster>
+      </div>
+      <div class="movie-list-arrow" (mouseout)="stopMoveSessionDates()" (mouseover)="moveSessionDates()" #arrowButtonElement>
+        <fa-icon [icon]="faChevronRight" class="pr-2 text-b3414b " size='3x'></fa-icon>
+      </div>
+        
     </div>
+  </div>
 </section>

@@ -15,3 +15,26 @@
 .carousel-control-next {
     width: fit-content;
 }
+
+.movie-list-arrow {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    height: 100%;
+    width: 2rem;
+}
+
+.movie-list-arrow fa-icon{ 
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+}
+
+.movie-list-arrow:hover fa-icon{
+    transition: all 0.5s ease;
+    opacity: 1;
+}

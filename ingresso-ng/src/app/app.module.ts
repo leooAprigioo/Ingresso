@@ -8,6 +8,7 @@ import { NavbarModule } from './components/navbar/navbar.module';
 import { MoviesModule } from './pages/movies/movies.module';
 import { FooterModule } from './components/footer/footer.module';
 import { MovieDetailModule } from './pages/movie-detail/movie-detail.module';
+import { LoginModule } from './pages/login/login.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MovieDetailModule } from './pages/movie-detail/movie-detail.module';
     NavbarModule,
     MoviesModule,
     MovieDetailModule,
+    LoginModule,
     FooterModule
   ],
   providers: [],

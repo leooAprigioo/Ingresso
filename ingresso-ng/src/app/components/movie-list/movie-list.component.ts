@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Filme } from 'src/app/models/filme';
@@ -10,10 +10,15 @@ import { Filme } from 'src/app/models/filme';
 })
 export class MovieListComponent implements OnInit {
 
+  @ViewChild('movieListElement', { static: false}) movieListElement: ElementRef;
+  @ViewChild('posterElement', { static: false}) posterElement: ElementRef;
+  @ViewChild('arrowButtonElement', { static: false}) arrowButtonElement: ElementRef;
+
+  moved: number = 0;
+  interval : any; 
+
   @Input() title: string;
   @Input() movies: Filme[];
-
-  carouselItemSize = 7;
 
   faChevronRight = faChevronRight;
 
@@ -22,18 +27,34 @@ export class MovieListComponent implements OnInit {
   ngOnInit() {
   }
 
-  getMoviesInSplit() {
-    return this.splitMovies()
+  moveSessionDates() {
+    const context = this;
+    this.interval = setInterval(function(){ 
+      if (context.checkToStopMove()) {
+        context.moved -= 5;
+      }
+    }, 25);
   }
 
-  splitMovies() {
-    let splited = [];
-    let index = 0;
-    while (index < this.movies.length) {
-      splited.push(this.movies.slice(index, index + this.carouselItemSize));
-      index += this.carouselItemSize;
-    }
-    return splited;
+  stopMoveSessionDates() {
+    clearInterval(this.interval);
   }
+
+  checkToStopMove() {
+    if (this.moved >= this.calculateSessionDatesLimit()) {
+      return true;
+    }
+    return false;
+  }
+
+  calculateSessionDatesLimit() {
+    let posterWidth = this.movies.length * this.posterElement.nativeElement.offsetWidth;
+    let arrowButtonWidth = this.arrowButtonElement.nativeElement.offsetWidth;
+    let movieListWidth = this.movieListElement.nativeElement.offsetWidth;
+    return (movieListWidth - posterWidth - arrowButtonWidth);
+
+    // TODO Calcular o tamanho da lista pelos componentes
+  }
+
 
 }
