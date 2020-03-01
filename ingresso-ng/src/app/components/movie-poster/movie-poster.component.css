@@ -1,7 +1,3 @@
-.poster {
-    width: 13%
-}
-
 .poster:hover {
     /* transform: scale(1.15); */
     transform: scale(1.05);
