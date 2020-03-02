@@ -10,11 +10,11 @@ def conectar():
     return sqlite3.connect('ingresso_db.sqlt')
 
 usuario_app = Blueprint('usuario_app', __name__)
-campos =["nome", "data_nascimento", "senha", "cpf", "endereco", "admin"]
-tipos = {"nome": str, "data_nascimento":str, "senha":str, "cpf":str, "endereco":str, "admin":bool}
+campos =["nome", "data_nascimento", "senha", "email", "cpf", "endereco", "admin"]
+tipos = {"nome": str, "data_nascimento":str, "senha":str, "email":str, "cpf":str, "endereco":str, "admin":bool}
 
-campos2 =["nome", "data_nascimento", "senha", "cpf", "endereco", "admin"]
-tipos2 = {"nome": str, "data_nascimento":str, "senha":str, "cpf":str, "endereco":str, "admin":bool}
+campos2 =["nome", "data_nascimento", "senha", "email", "cpf", "endereco", "admin"]
+tipos2 = {"nome": str, "data_nascimento":str, "senha":str, "email":str, "cpf":str, "endereco":str, "admin":bool}
 
 campos3 =["id" ]
 tipos3 = {"id":int}
@@ -47,7 +47,7 @@ def criar():
         if not validar_campos(dados,campos,tipos):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
         try:
-            cur.execute("Insert into usuario (nome,data_nascimento,senha,cpf,endereco,admin)values(?,?,?,?,?,?)",(dados['nome'],dados['data_nascimento'],dados['senha'],dados['cpf'],dados['endereco'],dados['admin'],))
+            cur.execute("Insert into usuario (nome,data_nascimento,senha,email,cpf,endereco,admin)values(?,?,?,?,?,?,?)",(dados['nome'],dados['data_nascimento'],dados['senha'],dados['email'],dados['cpf'],dados['endereco'],dados['admin'],))
             con.commit()
             return jsonify({'Mensagem':'sucesso'}),200                
         except Exception as inst:
@@ -60,7 +60,7 @@ def update(id):
         if not validar_campos(dados,campos2,tipos2):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
         try:
-            cur.execute("UPDATE usuario set nome=?,data_nascimento=?,senha=?,cpf=?,endereco=?,admin=? where id=?",(dados["nome"],dados['data_nascimento'],dados['senha'],dados['cpf'],dados["endereco"],dados['admin'],id,))
+            cur.execute("UPDATE usuario set nome=?,data_nascimento=?,senha=?,email=?,cpf=?,endereco=?,admin=? where id=?",(dados["nome"],dados['data_nascimento'],dados['senha'],dados['email'],dados['cpf'],dados["endereco"],dados['admin'],id,))
             con.commit()
             return jsonify({'Mensagem':'sucesso'}),200                
         except Exception as inst:
@@ -76,6 +76,22 @@ def delete(id):
                 cur.execute("delete from usuario where id=?",(id,))
                 con.commit()
                 return jsonify({'Mensagem':'sucesso'}),200                
+            except Exception as inst:
+                return jsonify({'Mensagem': inst.args}),400
+    
+
+@usuario_app.route('/login', methods=['GET'])
+def login():
+    dados = request.get_json()
+    with closing(conectar()) as con, closing(con.cursor()) as cur:
+        if not (type(id)):
+            return jsonify({'erro':'valor(es) inválido(s)'}),422
+        else:
+            try:
+                cur.execute("SELECT * FROM usuario WHERE email = ? and senha=?",(dados['email'],dados['senha'],))
+                con.commit()
+                dict = rows_to_dict(cur.description, cur.fetchall())
+                return localizar(dict[0]['id'])                
             except Exception as inst:
                 return jsonify({'Mensagem': inst.args}),400
     
