@@ -15,6 +15,7 @@ import { MovieFormModule } from './pages/movie-form/movie-form.module';
 import { SessionFormModule } from './pages/session-form/session-form.module';
 import { MovieRoomFormModule } from './pages/movie-room-form/movie-room-form.module';
 import { TicketTypeFormModule } from './pages/ticket-type-form/ticket-type-form.module';
+import { ListMovieModule } from './pages/list-movie/list-movie.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TicketTypeFormModule } from './pages/ticket-type-form/ticket-type-form.
     LoginModule,
     UserFormModule,
     MovieFormModule,
+    ListMovieModule,
     SessionFormModule,
     MovieRoomFormModule,
     TicketTypeFormModule,

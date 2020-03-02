@@ -13,6 +13,7 @@ import { CreateMovieRoomComponent } from './pages/movie-room-form/create-movie-r
 import { EditMovieRoomComponent } from './pages/movie-room-form/edit-movie-room/edit-movie-room.component';
 import { CreateTicketTypeComponent } from './pages/ticket-type-form/create-ticket-type/create-ticket-type.component';
 import { EditTicketTypeComponent } from './pages/ticket-type-form/edit-ticket-type/edit-ticket-type.component';
+import { ListMovieComponent } from './pages/list-movie/list-movie.component';
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: 'enabled',
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'edit-user/:userId', component: EditUserComponent},
   {path: 'create-movie', component: CreateMovieComponent},
   {path: 'edit-movie/:movieId', component: EditMovieComponent},
+  {path: 'list-movie', component: ListMovieComponent},
   {path: 'create-session', component: CreateSessionComponent},
   {path: 'edit-session/:sessionId', component: EditSessionComponent},
   {path: 'create-movie-room', component: CreateMovieRoomComponent},

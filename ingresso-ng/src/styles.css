@@ -50,6 +50,19 @@ body, html {
     border-radius: 0px;
 }
 
+.outline-raised-button {
+    border: 2px solid #b3414b;
+    border-radius: 5px;
+    color: #b3414b;
+    font-weight: bold;
+    padding: 0.3rem 1.5rem;
+}
+
+.outline-raised-button:hover {
+    border-color: #FFF;
+    color: #FFF;
+}
+
 .raised-button:hover, .rounded-button:hover {
     transform: scale(1.05);
     transition: transform 0.1s ease;
