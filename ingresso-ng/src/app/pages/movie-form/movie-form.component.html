@@ -1,0 +1,135 @@
+
+<main class="container-fluid">
+    <section class="row py-2">
+        <div class="col-3">
+            <app-admin-sidebar></app-admin-sidebar>
+        </div>
+        <div class="col-9">
+            <form class="container">
+                <section class="row justify-content-center">
+                    <div class="col-12">
+                        <h4 class="py-2">Novo filme</h4>
+                        <h6 class="subtitle font-weight-bold">Sobre o filme</h6>
+                    </div> 
+                    <div class="w-100"></div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input type="text" placeholder="Titulo do filme" name="title" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pr-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Data de lançamento" name="release_date" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pl-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Ano" name="year" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pr-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Duração" name="duration" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pl-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Genêro" name="gender" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <textarea type="text" placeholder="Sinopse" name="sinopse" class="form-control rounded-0" rows="4"></textarea>
+                        </div>
+                    </div>
+                </section>
+                <section class="row justify-content-center">
+                    <div class="col-12">
+                        <h6 class="subtitle font-weight-bold">Sobre o elenco</h6>
+                    </div> 
+                    <div class="w-100"></div>
+                    <div class="col-12 col-md-6 pr-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Diretor" name="director" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pl-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Ator" name="actor" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pr-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="País de origem" name="original_country" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pl-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Idioma" name="language" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pr-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="Classificação etária" name="Advisory-rating" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pl-md-5">
+                        <div class="form-group">
+                            <input type="text" placeholder="IMDB" name="imdb" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                </section>
+                <section class="row justify-content-center">
+                    <div class="col-12">
+                        <h6 class="subtitle font-weight-bold">Arquivos de mídia</h6>
+                    </div> 
+                    <div class="w-100"></div>
+                    <div class="col-12 col-md-6 pr-md-5">
+                        <div class="form-group">
+                            <small class="font-weight-bold">Poster (resolução recomendada: )</small>
+                            <input type="file" name="poster" id="poster" class="rounded-0 file-input" />
+                            <label for="poster">
+                                <span class="py-2 px-2 mr-2">Escolher arquivo</span>
+                                <small>
+                                    Nenhum arquivo selecionado
+                                </small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pl-md-5">
+                        <div class="form-group">
+                            <img />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pr-md-5">
+                        <div class="form-group">
+                            <small class="font-weight-bold">Banner (resolução recomendada: )</small>
+                            <input type="file" name="banner" id="banner" class="rounded-0 file-input" />
+                            <label for="banner">
+                                <span class="py-2 px-2 mr-2">Escolher arquivo</span>
+                                <small>
+                                    Nenhum arquivo selecionado
+                                </small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pl-md-5">
+                        <div class="form-group">
+                            <img />
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input type="text" placeholder="Link do trailer" name="trailer_url" class="form-control rounded-0" />
+                        </div>
+                    </div>
+                </section>
+                <section class="row justify-content-center py-3">
+                    <div class="col-12">
+                        <button type="submit" class="btn w-100 raised-button">Adicionar filme</button>
+                    </div>
+                </section>
+            </form>
+        </div>
+    </section>
+</main>

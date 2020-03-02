@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { MovieSessionComponent } from './movie-session.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [MovieSessionComponent],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    RouterModule
   ],
   exports: [
     MovieSessionComponent

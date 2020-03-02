@@ -6,9 +6,6 @@
     width: 100%;
 }
 
-.nav-link {
-    color: #b3414b;
-}
 .nav-link:hover {
     transform: translateX(0.5rem);
     transition: transform 0.2s ease;

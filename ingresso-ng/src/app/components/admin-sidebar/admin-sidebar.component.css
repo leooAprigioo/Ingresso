@@ -1,0 +1,13 @@
+.border-top {
+    border-top-color: #b3414b!important;
+}
+
+.nav-link:hover {
+    transition: all 0.2s ease;
+    transform: translateX(1rem);
+    color: #b3414b;
+}
+
+.active-link {
+    color: #b3414b!important;
+}

@@ -1,0 +1,39 @@
+
+<main class="container-fluid">
+    <section class="row py-2">
+        <div class="col-3">
+            <app-admin-sidebar></app-admin-sidebar>
+        </div>
+        <div class="col-9">
+            <form class="container">
+                <section class="row justify-content-center">
+                    <div class="col-12">
+                        <h4 class="py-2">Novo tipo de ingresso</h4>
+                        <h6 class="subtitle font-weight-bold">Preencha todas as informações</h6>
+                    </div> 
+                    <div class="w-100"></div>
+                    <div class="col-12 col-md-6 pr-md-5">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control rounded-0" placeholder="Nome do ingresso" />
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 pl-md-5">
+                        <div class="form-group">
+                            <input type="text" name="price" class="form-control rounded-0" placeholder="Preço" min="1"/>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <textarea type="text" name="annotations" class="form-control rounded-0" placeholder="Observação" rows="3"></textarea>
+                        </div>
+                    </div>
+                </section>
+                <section class="row justify-content-center py-3">
+                    <div class="col-12">
+                        <button type="submit" class="btn w-100 raised-button">Adicionar tippo do ingresso</button>
+                    </div>
+                </section>
+            </form>
+        </div>
+    </section>
+</main>

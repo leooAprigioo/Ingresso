@@ -9,6 +9,12 @@ import { MoviesModule } from './pages/movies/movies.module';
 import { FooterModule } from './components/footer/footer.module';
 import { MovieDetailModule } from './pages/movie-detail/movie-detail.module';
 import { LoginModule } from './pages/login/login.module';
+import { UserFormModule } from './pages/user-form/user-form.module';
+import { RouterModule } from '@angular/router';
+import { MovieFormModule } from './pages/movie-form/movie-form.module';
+import { SessionFormModule } from './pages/session-form/session-form.module';
+import { MovieRoomFormModule } from './pages/movie-room-form/movie-room-form.module';
+import { TicketTypeFormModule } from './pages/ticket-type-form/ticket-type-form.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +27,13 @@ import { LoginModule } from './pages/login/login.module';
     MoviesModule,
     MovieDetailModule,
     LoginModule,
-    FooterModule
+    UserFormModule,
+    MovieFormModule,
+    SessionFormModule,
+    MovieRoomFormModule,
+    TicketTypeFormModule,
+    FooterModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

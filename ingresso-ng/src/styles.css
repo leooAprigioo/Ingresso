@@ -39,6 +39,10 @@ body, html {
     color: #b3414b;
 }
 
+.nav-link {
+    color: #b3414b;
+}
+
 .raised-button {
     background-color: #b3414b;
     color: #FFF!important;
@@ -51,6 +55,19 @@ body, html {
     transition: transform 0.1s ease;
 }
 
+.file-input {
+    opacity: 0;
+    width: 0;
+}
+
+.file-input + label {
+    color: #495057;
+}
+
+.file-input + label span {
+    border: 1px solid #ced4da;
+}
+
 .rounded-button {
     background-color: #b3414b;
     color: #FFF!important;
@@ -58,4 +75,8 @@ body, html {
     border-radius: 30px;
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+}
+
+.subtitle {
+    font-size: 0.9rem;
 }
