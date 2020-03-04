@@ -6,18 +6,20 @@ import { EditTicketTypeComponent } from './edit-ticket-type/edit-ticket-type.com
 import { RouterModule } from '@angular/router';
 import { AdminSidebarModule } from 'src/app/components/admin-sidebar/admin-sidebar.module';
 
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [TicketTypeFormComponent, CreateTicketTypeComponent, EditTicketTypeComponent],
   imports: [
     CommonModule,
     RouterModule,
-    AdminSidebarModule
+    AdminSidebarModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   exports: [
     CreateTicketTypeComponent, 
-    EditTicketTypeComponent
+    EditTicketTypeComponent,
   ]
 })
 export class TicketTypeFormModule { }

@@ -5,7 +5,7 @@
             <app-admin-sidebar></app-admin-sidebar>
         </div>
         <div class="col-9">
-            <form class="container">
+            <form class="container" [formGroup]="formGroup" (submit)="onSubmit()">
                 <section class="row justify-content-center">
                     <div class="col-12">
                         <h4 class="py-2">Nova sala</h4>
@@ -14,12 +14,12 @@
                     <div class="w-100"></div>
                     <div class="col-12 col-md-6 pr-md-5">
                         <div class="form-group">
-                            <input type="text" name="name" class="form-control rounded-0" placeholder="Nome da sala" />
+                            <input type="text" name="name" class="form-control rounded-0" placeholder="Nome da sala" formControlName="nome" />
                         </div>
                     </div>
                     <div class="col-12 col-md-6 pl-md-5">
                         <div class="form-group">
-                            <select class="form-control rounded-0" name="room">
+                            <select class="form-control rounded-0" name="room" formControlName="tipo_sala">
                                 <option value="">Selecione o tipo da sala</option>
                                 <option value="10">2D</option>
                             </select>
@@ -27,12 +27,12 @@
                     </div>
                     <div class="col-12 col-md-6 pr-md-5">
                         <div class="form-group">
-                            <input type="number" name="rows" class="form-control rounded-0" placeholder="Quantidade de fileiras" min="1"/>
+                            <input type="number" name="rows" class="form-control rounded-0" placeholder="Quantidade de fileiras" min="1" formControlName="quantidade_fileira"/>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 pl-md-5">
                         <div class="form-group">
-                            <input type="number" name="seats" class="form-control rounded-0" placeholder="Quantidade de assentos" min="10"/>
+                            <input type="number" name="seats" class="form-control rounded-0" placeholder="Quantidade de assentos" min="10" formControlName="quantidade_assento" />
                         </div>
                     </div>
                 </section>

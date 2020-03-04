@@ -5,7 +5,7 @@
             <app-admin-sidebar></app-admin-sidebar>
         </div>
         <div class="col-9">
-            <form class="container">
+            <form class="container" [formGroup]="formGroup" (submit)="onSubmit()">
                 <section class="row justify-content-center">
                     <div class="col-12">
                         <h4 class="py-2">Nova sessão</h4>
@@ -14,7 +14,7 @@
                     <div class="w-100"></div>
                     <div class="col-12">
                         <div class="form-group">
-                            <select class="form-control rounded-0" name="movie">
+                            <select class="form-control rounded-0" name="movie" formControlName="filme_id">
                                 <option value="">Selecione o filme</option>
                                 <optgroup label="A">
                                     <option value="10">Star wars</option>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-12 col-md-6 pr-md-5">
                         <div class="form-group">
-                            <select class="form-control rounded-0" name="room">
+                            <select class="form-control rounded-0" name="room" formControlName="sala_id">
                                 <option value="">Selecione a sala</option>
                                 <option value="10">2D</option>
                             </select>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-12 col-md-6 pl-md-5">
                         <div class="form-group">
-                            <select class="form-control rounded-0" name="format">
+                            <select class="form-control rounded-0" name="format" formControlName="formato">
                                 <option value="">Selecione o formato (Ex.: 2D)</option>
                                 <option value="10">2D</option>
                             </select>
@@ -40,22 +40,22 @@
                     </div>
                     <div class="col-12 col-md-6 pr-md-5">
                         <div class="form-group">
-                            <select class="form-control rounded-0" name="dub">
+                            <select class="form-control rounded-0" name="dub" formControlName="dublado">
                                 <option value="">Dublado</option>
                                 <option value="10">Legendado</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-12 col-md-3 pl-md-5">
+                    <div class="col-12 col-md-6 pl-md-5">
                         <div class="form-group">
-                            <input type="text" placeholder="Data" name="session_date" class="form-control rounded-0" />
+                            <input type="datetime-local" placeholder="Data" name="session_date" class="form-control rounded-0" formControlName="data_horario_inicio" />
                         </div>
                     </div>
-                    <div class="col-12 col-md-3 pl-md-5">
+                    <!-- <div class="col-12 col-md-3 pl-md-5">
                         <div class="form-group">
-                            <input type="text" placeholder="Hora" name="session_hour" class="form-control rounded-0" />
+                            <input type="d" placeholder="Hora" name="session_hour" class="form-control rounded-0" />
                         </div>
-                    </div>
+                    </div> -->
                 </section>
                 <section class="row justify-content-center py-3">
                     <div class="col-12">

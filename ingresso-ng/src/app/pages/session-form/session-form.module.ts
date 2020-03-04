@@ -6,14 +6,16 @@ import { CreateSessionComponent } from './create-session/create-session.componen
 import { EditSessionComponent } from './edit-session/edit-session.component';
 import { AdminSidebarModule } from 'src/app/components/admin-sidebar/admin-sidebar.module';
 
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SessionFormComponent, CreateSessionComponent, EditSessionComponent],
   imports: [
     CommonModule,
     RouterModule,
-    AdminSidebarModule
+    AdminSidebarModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   exports: [
     CreateSessionComponent, 

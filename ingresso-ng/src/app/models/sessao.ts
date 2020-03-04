@@ -1,7 +1,7 @@
 import { Filme } from './filme';
-import { Sala } from './Sala';
+import { Sala } from './sala';
 
-export class Session {
+export class Sessao {
     public id: number;
     public sala_id: Sala;
     public filme_id: Filme;

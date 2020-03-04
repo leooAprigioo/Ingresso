@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnChanges, Input } from '@angular/core';
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { Session } from 'src/app/models/Session';
+import { Sessao } from 'src/app/models/sessao';
 
 @Component({
   selector: 'app-movie-session',
@@ -14,7 +14,7 @@ export class MovieSessionComponent implements OnInit, OnChanges {
   moved: number = 0;
   interval : any;
 
-  @Input() sessions: Session[];
+  @Input() sessions: Sessao[];
 
   @ViewChild('sessionDatesElement', { static: false}) sessionDatesElement: ElementRef;
   @ViewChild('sessionElement', { static: false}) posterElement: ElementRef;
