@@ -80,18 +80,20 @@ def delete(id):
                 return jsonify({'Mensagem': inst.args}),400
     
 
-@usuario_app.route('/login', methods=['GET'])
-def login():
-    dados = request.get_json()
+@usuario_app.route('/login/<string:email>/<string:senha>', methods=['GET'])
+def login(email,senha):
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         if not (type(id)):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
         else:
             try:
-                cur.execute("SELECT * FROM usuario WHERE email = ? and senha=?",(dados['email'],dados['senha'],))
+                cur.execute("SELECT * FROM usuario WHERE email = ? and senha=?",(email,senha,))
                 con.commit()
                 dict = rows_to_dict(cur.description, cur.fetchall())
-                return localizar(dict[0]['id'])                
+                if (len(dict)!=0):
+                    return localizar(dict[0]['id'])
+                else:
+                    return jsonify({'Mensagem': 'usuario não encontrado'}),404
             except Exception as inst:
                 return jsonify({'Mensagem': inst.args}),400
     
