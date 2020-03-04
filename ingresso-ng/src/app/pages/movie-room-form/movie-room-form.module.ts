@@ -5,7 +5,7 @@ import { CreateMovieRoomComponent } from './create-movie-room/create-movie-room.
 import { EditMovieRoomComponent } from './edit-movie-room/edit-movie-room.component';
 import { RouterModule } from '@angular/router';
 import { AdminSidebarModule } from 'src/app/components/admin-sidebar/admin-sidebar.module';
-
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +13,9 @@ import { AdminSidebarModule } from 'src/app/components/admin-sidebar/admin-sideb
   imports: [
     CommonModule,
     RouterModule,
-    AdminSidebarModule
+    AdminSidebarModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     CreateMovieRoomComponent,

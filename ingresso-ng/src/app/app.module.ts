@@ -16,6 +16,7 @@ import { SessionFormModule } from './pages/session-form/session-form.module';
 import { MovieRoomFormModule } from './pages/movie-room-form/movie-room-form.module';
 import { TicketTypeFormModule } from './pages/ticket-type-form/ticket-type-form.module';
 import { ListMovieModule } from './pages/list-movie/list-movie.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ListMovieModule } from './pages/list-movie/list-movie.module';
     MovieRoomFormModule,
     TicketTypeFormModule,
     FooterModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

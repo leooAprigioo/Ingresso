@@ -1,5 +1,5 @@
 <main class="container-fluid py-4">
-    <form>
+    <form [formGroup]="formGroup" (submit)="onSubmit()">
         <section class="row justify-content-center">
             <div class="col-12 col-md-8">
                 <h4 class="py-2">Cadastre-se</h4>
@@ -8,18 +8,18 @@
             <div class="w-100"></div>
             <div class="col-12 col-md-4 pr-md-5">
                 <div class="form-group">
-                    <input type="text" placeholder="Nome completo" name="name" class="form-control rounded-0" />
+                    <input type="text" placeholder="Nome completo" name="name" class="form-control rounded-0" formControlName="nome" />
                 </div>
                 <div class="form-group">
-                    <input type="date" placeholder="Data de nascimento" name="birth_date" class="form-control rounded-0" />
+                    <input type="date" placeholder="Data de nascimento" name="birth_date" class="form-control rounded-0" formControlName="dataNascimento" />
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="Endereço" name="address" class="form-control rounded-0" />
+                    <input type="text" placeholder="Endereço" name="address" class="form-control rounded-0" formControlName="endereco"/>
                 </div>
             </div>
             <div class="col-12 col-md-4 pl-md-5 section-divider-left">
                 <div class="form-group">
-                    <input type="text" placeholder="CPF" name="cpf" class="form-control rounded-0" />
+                    <input type="text" placeholder="CPF" name="cpf" class="form-control rounded-0" formControlName="cpf" />
                 </div>
                 <div class="form-group">
                     <input type="phone" placeholder="Telefone" name="phone" class="form-control rounded-0" />
@@ -33,13 +33,13 @@
             <div class="w-100"></div>
             <div class="col-12 col-md-8">
                 <div class="form-group">
-                    <input type="email" placeholder="E-mail" name="email" class="form-control rounded-0" />
+                    <input type="email" placeholder="E-mail" name="email" class="form-control rounded-0" formControlName="email" />
                 </div>
             </div>
             <div class="w-100"></div>
             <div class="col-12 col-md-4 pr-md-5">
                 <div class="form-group">
-                    <input type="password" placeholder="Senha" name="password" class="form-control rounded-0" />
+                    <input type="password" placeholder="Senha" name="password" class="form-control rounded-0" formControlName="senha" />
                 </div>
             </div>
             <div class="col-12 col-md-4 pl-md-5">
@@ -55,3 +55,4 @@
         </section>
     </form>
 </main>
+
