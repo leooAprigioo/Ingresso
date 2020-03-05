@@ -24,16 +24,16 @@ const routes: Routes = [
   {path: 'movie', component: MovieDetailComponent},
   {path: 'login', component: LoginComponent},
   {path: 'create-user', component: CreateUserComponent},
-  {path: 'edit-user/:userId', component: EditUserComponent},
+  {path: 'edit-user/:id', component: EditUserComponent},
   {path: 'create-movie', component: CreateMovieComponent},
-  {path: 'edit-movie/:movieId', component: EditMovieComponent},
+  {path: 'edit-movie/:id', component: EditMovieComponent},
   {path: 'list-movie', component: ListMovieComponent},
   {path: 'create-session', component: CreateSessionComponent},
-  {path: 'edit-session/:sessionId', component: EditSessionComponent},
+  {path: 'edit-session/:id', component: EditSessionComponent},
   {path: 'create-movie-room', component: CreateMovieRoomComponent},
-  {path: 'edit-movie-room/:movieRoomId', component: EditMovieRoomComponent},
+  {path: 'edit-movie-room/:id', component: EditMovieRoomComponent},
   {path: 'create-ticket-type', component: CreateTicketTypeComponent},
-  {path: 'edit-ticket-type/:ticketTypeId', component: EditTicketTypeComponent}
+  {path: 'edit-ticket-type/:id', component: EditTicketTypeComponent}
 ];
 
 @NgModule({

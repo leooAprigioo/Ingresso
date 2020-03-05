@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light shadow-sm navbar-expand-lg bg-35363A">
     <a routerLink="#" class="navbar-brand">
         <div>
-            <img src="assets/icons/logo.svg" width="48" height="48"/> <span class="font-arvo font-weight-bold text-white">Cine.com</span>
+            <img src="assets/icons/logo.svg" width="48" height="48"/> <span class="font-arvo font-weight-bold text-white">SeuCine.org</span>
         </div>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +19,9 @@
             </li>
             <li class="nav-item active mx-3">
                 <a class="nav-link text-white" routerLink="/login"><img src="assets/icons/user-white.svg" width="30" height="30" class="pr-2" />Entrar</a>
+            </li>
+            <li class="nav-item active mx-3">
+                <a class="nav-link text-white" routerLink="/list-movie" *ngIf="usuario.admin"><fa-icon [icon]="faLock" class="pr-2"></fa-icon>Administrador</a>
             </li>
         </ul>
     </div>

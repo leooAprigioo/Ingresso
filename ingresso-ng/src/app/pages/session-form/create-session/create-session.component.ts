@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Sessao } from 'src/app/models/sessao';
+import { SessaoService } from 'src/app/services/sessao/sessao.service';
 
 @Component({
   selector: 'app-create-session',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateSessionComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private sessaoService: SessaoService
+  ) { }
 
   ngOnInit() {
+  }
+
+  create(sessao: Sessao) {
+    this.sessaoService.post(sessao).subscribe((data) =>
+      console.log(data)
+    );
   }
 
 }

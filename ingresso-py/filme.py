@@ -92,7 +92,7 @@ def update(id):
         return localizar(id)
 
 
-@filme_app.route('/filme/delete/<int:id>', methods=['POST'])
+@filme_app.route('/filme/delete/<int:id>', methods=['DELETE'])
 def delete(id):
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         if not (type(id)):
@@ -104,7 +104,7 @@ def delete(id):
 @filme_app.route('/filme/emcartaz', methods=['GET'])
 def emcartaz():
      with closing(conectar()) as con, closing(con.cursor()) as cur:
-        cur.execute("SELECT * FROM filme where em_cartaz = 0")
+        cur.execute("SELECT * FROM filme where em_cartaz = 1")
         con.commit()
         acabou=False
         while not acabou:

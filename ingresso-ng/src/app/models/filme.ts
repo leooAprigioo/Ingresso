@@ -15,6 +15,7 @@ export class Filme {
     public poster : string;
     public banner : string;
     public trailer_url : string;
+    public em_cartaz : boolean;
 
     constructor (
         id : number,
@@ -32,7 +33,8 @@ export class Filme {
         imdb? : number,
         poster? : string,
         banner? : string,
-        trailer_url? : string
+        trailer_url? : string,
+        em_cartaz? : boolean
     ) {
         this.id = id; 
         this.titulo = titulo;
@@ -50,5 +52,6 @@ export class Filme {
         this.poster = poster;
         this.banner = banner;
         this.trailer_url = trailer_url;
+        this.em_cartaz = em_cartaz;
     }
 }

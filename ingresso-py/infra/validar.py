@@ -12,7 +12,7 @@ def validar_campos(obj, campos_obrigatorios, tipos):
             return False
     for item in obj:
         if type(obj[item]) != tipos[item]:
-            if type(obj[item])==int and tipos[item]==float:
+            if type(obj[item])==float and tipos[item]==int:
                 return True
             else:
                 print('error type: ' + item)

@@ -2,6 +2,11 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Sessao } from 'src/app/models/sessao';
+import { Sala } from 'src/app/models/sala';
+import { SalaService } from 'src/app/services/sala/sala.service';
+import { SessaoService } from 'src/app/services/sessao/sessao.service';
+import { FilmeService } from 'src/app/services/filme/filme.service';
+import { Filme } from 'src/app/models/filme';
 @Component({
   selector: 'app-session-form',
   templateUrl: './session-form.component.html',
@@ -10,24 +15,36 @@ import { Sessao } from 'src/app/models/sessao';
 export class SessionFormComponent implements OnInit {
 
   @Input() editMode: boolean;
-  @Input() movieId : number;
+  @Input() salaId : number;
   @Output() submitForm = new EventEmitter<Sessao>();
 
   public formGroup: FormGroup;
+  public salas : Sala[];
+  public filmes: Filme[];
 
   constructor(
     private formBuilder: FormBuilder,
+    private salaService: SalaService,
+    private sessaoService: SessaoService,
+    private filmeService : FilmeService,
     // private movieService : UsuarioService
   ) { }
 
   ngOnInit() {
     this.initializeForm();
-    if (this.movieId) {
-      // this.movieService.get(this.movieId).subscribe((data:Usuario) => {
-      //   this.populateForm(data);
-      // })
+    this.salaService.list().subscribe((data:Sala[]) => {
+      this.salas = data;
+      console.log(data)
+    });
+
+    this.filmeService.list().subscribe((data: Filme[]) => this.filmes = data);
+
+    if (this.salaId) {
+      this.sessaoService.get(this.salaId).subscribe((data: Sessao) => {
+        this.populateForm(data);
+      })
     } 
-    console.log(this.formGroup);
+    console.log(this.salas);
   }
 
   onSubmit() {
@@ -37,12 +54,12 @@ export class SessionFormComponent implements OnInit {
 
   initializeForm() {
     this.formGroup = this.formBuilder.group({
-      id : ['', Validators.required],
-      sala_id : ['', Validators.required],
-      filme_id : ['', Validators.required],
+      id : [0, Validators.required],
+      sala_id : [0, Validators.required],
+      filme_id : [0, Validators.required],
       data_horario_inicio : ['', Validators.required],
       formato : [''],
-      dublado : [''],
+      dublado : [1],
     })
   }
 

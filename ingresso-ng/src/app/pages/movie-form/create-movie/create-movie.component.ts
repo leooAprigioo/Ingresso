@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Filme } from 'src/app/models/filme';
+import { FilmeService } from 'src/app/services/filme/filme.service';
 
 @Component({
   selector: 'app-create-movie',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateMovieComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private filmeService: FilmeService
+  ) { }
 
   ngOnInit() {
+  }
+
+  create(filme: Filme) {
+    this.filmeService.post(filme).subscribe((data) =>
+      console.log(data)
+    );
   }
 
 }

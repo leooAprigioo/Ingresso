@@ -10,8 +10,8 @@ def conectar():
     return sqlite3.connect('ingresso_db.sqlt')
 
 sessao_app = Blueprint('sessao_app', __name__)
-campos =["sala_id", "filme_id", "data_horario_inicio", "formato", "dublado"]
-tipos = {"sala_id":int, "filme_id":int, "data_horario_inicio":str, "formato":str, "dublado":int}
+campos =["id", "sala_id", "filme_id", "data_horario_inicio", "formato", "dublado"]
+tipos = {"id": int, "sala_id":int, "filme_id":int, "data_horario_inicio":str, "formato":str, "dublado":int}
 
 #campos2 =["titulo", "data_lancamento", "ano", "duracao", "genero", "diretor", "atores", "sinopse", "classificacao", "idioma","pais","poster","imdb"]
 #tipos2 = {"titulo":str, "data_lancamento":str, "ano":int, "duracao":int, "genero":str, "diretor":str, "atores":str, "sinopse":str, "classificacao":int, "idioma":str,"pais":str,"poster":str,"imdb":int}
