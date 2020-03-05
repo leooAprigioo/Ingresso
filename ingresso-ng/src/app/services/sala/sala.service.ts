@@ -18,17 +18,19 @@ export class SalaService {
     private httpClient: HttpClient,
   ) { }
 
-  list(): Observable<Sala> {
+  list(): Observable<Sala[]> {
     return this.httpClient.get(`${api.path()}/sala`)
       .pipe(
         take(1),
-        map((data: Sala) => {
-          return new Sala(
-            data.id,
-            data.nome,
-            data.quantidade_fileira,
-            data.quantidade_assento
-          );
+        map((data: any) => {
+          return data.map((item: Sala) => {
+            return new Sala(
+              item.id,
+              item.nome,
+              item.quantidade_fileira,
+              item.quantidade_assento
+            );
+          }) 
         })
       );
   }
@@ -39,10 +41,10 @@ export class SalaService {
         take(1),
         map((data: Sala) => {
           return new Sala(
-            data.id,
-            data.nome,
-            data.quantidade_fileira,
-            data.quantidade_assento
+            data[0].id,
+            data[0].nome,
+            data[0].quantidade_fileira,
+            data[0].quantidade_assento
           );
         })
       );

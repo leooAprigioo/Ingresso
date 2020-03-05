@@ -10,11 +10,11 @@ def conectar():
     return sqlite3.connect('ingresso_db.sqlt')
 
 usuario_app = Blueprint('usuario_app', __name__)
-campos =["nome", "data_nascimento", "senha", "email", "cpf", "endereco", "admin"]
-tipos = {"nome": str, "data_nascimento":str, "senha":str, "email":str, "cpf":str, "endereco":str, "admin":bool}
+campos =["id", "nome", "data_nascimento", "senha", "email", "cpf", "endereco", "admin"]
+tipos = {"id": int, "nome": str, "data_nascimento":str, "senha":str, "email":str, "cpf":str, "endereco":str, "admin":bool}
 
-campos2 =["nome", "data_nascimento", "senha", "email", "cpf", "endereco", "admin"]
-tipos2 = {"nome": str, "data_nascimento":str, "senha":str, "email":str, "cpf":str, "endereco":str, "admin":bool}
+campos2 =["id", "nome", "data_nascimento", "senha", "email", "cpf", "endereco", "admin"]
+tipos2 = {"id": int, "nome": str, "data_nascimento":str, "senha":str, "email":str, "cpf":str, "endereco":str, "admin":bool}
 
 campos3 =["id" ]
 tipos3 = {"id":int}
@@ -43,6 +43,7 @@ def localizar(id):
 @usuario_app.route('/usuario/criar', methods=['POST'])
 def criar():
     dados = request.get_json()
+    print
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         if not validar_campos(dados,campos,tipos):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
@@ -93,9 +94,9 @@ def login(email,senha):
                 if (len(dict)!=0):
                     return localizar(dict[0]['id'])
                 else:
-                    return jsonify({'Mensagem': 'usuario não encontrado'}),404
+                    return jsonify({'Mensagem': 'usuario não encontrado'}),400
             except Exception as inst:
-                return jsonify({'Mensagem': inst.args}),400
+                return jsonify({'Mensagem': inst.args}),500
     
 
 

@@ -18,29 +18,33 @@ export class FilmeService {
     private httpClient: HttpClient,
   ) { }
 
-  list(): Observable<Filme> {
+  list(): Observable<Filme[]> {
     return this.httpClient.get(`${api.path()}/filme`)
       .pipe(
         take(1),
-        map((data: Filme) => {
-          return new Filme(
-            data.id,
-            data.titulo,
-            data.data_lancamento,
-            data.ano,
-            data.duracao,
-            data.genero,
-            data.diretor,
-            data.atores,
-            data.sinopse,
-            data.classificacao,
-            data.idioma,
-            data.pais,
-            data.imdb,
-            data.poster,
-            data.banner,
-            data.trailer_url
-          );
+        map((data: any) => {
+          return data.map(
+            (item: Filme) => {
+              return new Filme(
+                item.id,
+                item.titulo,
+                item.data_lancamento,
+                item.ano,
+                item.duracao,
+                item.genero,
+                item.diretor,
+                item.atores,
+                item.sinopse,
+                item.classificacao,
+                item.idioma,
+                item.pais,
+                item.imdb,
+                item.poster,
+                item.banner,
+                item.trailer_url
+              );
+            })
+          
         })
       );
   }
@@ -50,23 +54,25 @@ export class FilmeService {
       .pipe(
         take(1),
         map((data: Filme) => {
+          
           return new Filme(
-            data.id,
-            data.titulo,
-            data.data_lancamento,
-            data.ano,
-            data.duracao,
-            data.genero,
-            data.diretor,
-            data.atores,
-            data.sinopse,
-            data.classificacao,
-            data.idioma,
-            data.pais,
-            data.imdb,
-            data.poster,
-            data.banner,
-            data.trailer_url
+            data[0].id,
+            data[0].titulo,
+            data[0].data_lancamento,
+            data[0].ano,
+            data[0].duracao,
+            data[0].genero,
+            data[0].diretor,
+            data[0].atores,
+            data[0].sinopse,
+            data[0].classificacao,
+            data[0].idioma,
+            data[0].pais,
+            data[0].imdb,
+            data[0].poster,
+            data[0].banner,
+            data[0].trailer_url,
+            data[0].em_cartaz
           );
         })
       );
@@ -78,7 +84,7 @@ export class FilmeService {
   }
 
   put(params: Filme) {
-    return this.httpClient.put(`${api.path()}/filme/update`, params);
+    return this.httpClient.put(`${api.path()}/filme/update/${params.id}`, JSON.stringify(params), {headers: this.httpHeader});
   }
 
   delete (id: number) {

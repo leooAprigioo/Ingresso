@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from "@angular/router"
 
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -36,7 +38,11 @@ export class LoginComponent implements OnInit {
 
     console.log(email, password);
     this.usuarioService.auth(email, password).subscribe(
-      (data: Usuario) => this.localStorageService.setItem('usuario', data),
+      (data: Usuario) => {
+        this.localStorageService.setItem('usuario', data);
+        this.router.navigate(['/'])
+
+      },
       (err => console.log(err))
       );
 

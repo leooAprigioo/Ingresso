@@ -12,8 +12,8 @@ def conectar():
     return sqlite3.connect('ingresso_db.sqlt')
 
 filme_app = Blueprint('filme_app', __name__)
-campos =["titulo", "data_lancamento", "ano", "duracao", "genero", "diretor", "atores", "sinopse", "classificacao", "idioma","pais","poster","imdb"]
-tipos = {"titulo":str, "data_lancamento":str, "ano":int, "duracao":int, "genero":str, "diretor":str, "atores":str, "sinopse":str, "classificacao":int, "idioma":str,"pais":str,"poster":str,"imdb":int}
+campos =["id", "titulo", "data_lancamento", "ano", "duracao", "genero", "diretor", "atores", "sinopse", "classificacao", "idioma","pais","poster","imdb", "em_cartaz", "banner", "trailer_url"]
+tipos = {"id": int, "titulo":str, "data_lancamento":str, "ano":int, "duracao":int, "genero":str, "diretor":str, "atores":str, "sinopse":str, "classificacao":int, "idioma":str,"pais":str,"poster":str,"imdb":int, "em_cartaz": bool, "banner": str, "trailer_url": str }
 
 #campos2 =["titulo", "data_lancamento", "ano", "duracao", "genero", "diretor", "atores", "sinopse", "classificacao", "idioma","pais","poster","imdb"]
 #tipos2 = {"titulo":str, "data_lancamento":str, "ano":int, "duracao":int, "genero":str, "diretor":str, "atores":str, "sinopse":str, "classificacao":int, "idioma":str,"pais":str,"poster":str,"imdb":int}
@@ -92,7 +92,7 @@ def update(id):
         return localizar(id)
 
 
-@filme_app.route('/filme/delete/<int:id>', methods=['POST'])
+@filme_app.route('/filme/delete/<int:id>', methods=['DELETE'])
 def delete(id):
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         if not (type(id)):
@@ -104,7 +104,7 @@ def delete(id):
 @filme_app.route('/filme/emcartaz', methods=['GET'])
 def emcartaz():
      with closing(conectar()) as con, closing(con.cursor()) as cur:
-        cur.execute("SELECT * FROM filme where em_cartaz = 0")
+        cur.execute("SELECT * FROM filme where em_cartaz = 1")
         con.commit()
         acabou=False
         while not acabou:

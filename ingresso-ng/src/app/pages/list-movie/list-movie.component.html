@@ -15,22 +15,22 @@
                 </div> 
                 <div class="w-100"></div>
                 <div class="col-11 bg-35363A py-2 align-self-start">
-                    <div class="row py-3 mx-2 border-bottom no-gutters align-items-center" *ngFor="let teste of [1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 10]">
+                    <div class="row py-3 mx-2 border-bottom no-gutters align-items-center" *ngFor="let filme of filmes">
                         <div class="col-10">
-                            <h5 class="text-white mb-0">Sonic </h5>
-                            <small class="text-white">146 min</small>
+                            <h5 class="text-white mb-0">{{ filme.titulo }} </h5>
+                            <small class="text-white">{{ filme.duracao }} min</small>
                             <span class="circle"></span>
-                            <small class="text-white">2019</small>
+                            <small class="text-white">{{ filme.ano }}</small>
                             <span class="circle"></span>
-                            <small class="text-white">Inglês</small>
+                            <small class="text-white">{{ filme.idioma }}</small>
                             <span class="circle"></span>
-                            <small class="text-white">Ação, Aventura, Comédia, Tanann, tanan</small>
+                            <small class="text-white">{{ filme.genero }}</small>
                             <!-- 107 characters with '...' -->
-                            <small class="text-white d-block">Sonic tries to navigate the complexities of life on Earth with his newfound best friend -- a human named...</small>
+                            <small class="text-white d-block">{{ filme.sinopse }}</small>
                         </div>
                         <div class="col-2">
-                            <a routerLink="/edit-movie/10" class="mx-2 icon"><fa-icon [icon]="faEdit" size="2x" class="text-warning icon"></fa-icon></a>
-                            <a routerLink="#" class="mx-2 icon"><fa-icon [icon]="faTimes"size="2x" class="text-danger "></fa-icon></a>
+                            <a routerLink="/edit-movie/{{ filme.id }}" class="mx-2 icon"><fa-icon [icon]="faEdit" size="2x" class="text-warning icon"></fa-icon></a>
+                            <a style="cursor: pointer;" class="mx-2 icon" (click)="delete(filme.id)"><fa-icon [icon]="faTimes"size="2x" class="text-danger "></fa-icon></a>
                         </div>
                     </div>
                 </div>
