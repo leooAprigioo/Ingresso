@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Sessao } from 'src/app/models/sessao';
 import { SessaoService } from 'src/app/services/sessao/sessao.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-session',
@@ -10,7 +11,8 @@ import { SessaoService } from 'src/app/services/sessao/sessao.service';
 export class CreateSessionComponent implements OnInit {
 
   constructor(
-    private sessaoService: SessaoService
+    private sessaoService: SessaoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -19,7 +21,9 @@ export class CreateSessionComponent implements OnInit {
   create(sessao: Sessao) {
     this.sessaoService.post(sessao).subscribe((data) =>
       console.log(data)
-    );
+    );  
+    this.router.navigate(['/edit-session/1']);
+    
   }
 
 }

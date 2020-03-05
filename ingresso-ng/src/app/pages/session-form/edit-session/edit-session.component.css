@@ -1,0 +1,21 @@
+.circle {
+    width: 5px;
+    height: 5px;
+    border-radius: 100px;
+    background-color: #FFF;
+    display: inline-block;
+    margin: 0 .5rem;
+}
+
+.border-bottom {
+    border-color: #b3414b!important;
+}
+
+.text-warning {
+    color: #ffcf40!important;
+}
+
+.icon:hover {
+    transform: scale(.9);
+    transition: all .1s ease;
+}

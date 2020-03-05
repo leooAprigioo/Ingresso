@@ -11,14 +11,14 @@ def conectar():
 
 tipo_ingresso_app = Blueprint('tipo_ingresso_app', __name__)
 campos =["id", "nome", "preco", "observacao"]
-tipos = {"id":int, "nome":str, "preco":float, "observacao":str}
+tipos = {"id":str, "nome":str, "preco":str, "observacao":str}
 
 #campos2 =["titulo", "data_lancamento", "ano", "duracao", "genero", "diretor", "atores", "sinopse", "classificacao", "idioma","pais","poster","imdb"]
 #tipos2 = {"titulo":str, "data_lancamento":str, "ano":int, "duracao":int, "genero":str, "diretor":str, "atores":str, "sinopse":str, "classificacao":int, "idioma":str,"pais":str,"poster":str,"imdb":int}
 
 
-campos3 =["id" ]
-tipos3 = {"id":int}
+campos3 =["id", "nome", "preco", "observacao"]
+tipos3 = {"id":int, "nome":str, "preco":int, "observacao":str}
 
 
 @tipo_ingresso_app.route('/tipo_ingresso', methods=['GET'])
@@ -56,7 +56,7 @@ def criar():
 def update(id):
     dados = request.get_json()
     with closing(conectar()) as con, closing(con.cursor()) as cur:
-        if not validar_campos(dados,campos,tipos):
+        if not validar_campos(dados,campos3,tipos3):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
         try:
             cur.execute("UPDATE tipo_ingresso set nome=?,preco=?,observacao=? where id=?",(dados['nome'],dados['preco'],dados['observacao'],id,))
@@ -67,7 +67,7 @@ def update(id):
 
 
 
-@tipo_ingresso_app.route('/tipo_ingresso/delete/<int:id>', methods=['POST'])
+@tipo_ingresso_app.route('/tipo_ingresso/delete/<int:id>', methods=['delete'])
 def delete(id):
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         if not (type(id)):

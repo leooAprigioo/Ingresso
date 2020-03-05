@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Tipo_Ingresso } from 'src/app/models/tipo_ingresso';
+import { TipoIngressoService } from 'src/app/services/tipo_ingresso/tipo-ingresso.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-type-form',
@@ -11,21 +13,24 @@ export class TicketTypeFormComponent implements OnInit {
 
   @Input() editMode: boolean;
   @Input() movieId : number;
+  @Input() ingressoId:number;
   @Output() submitForm = new EventEmitter<Tipo_Ingresso>();
 
   public formGroup: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    // private movieService : UsuarioService
+    private ingressoService : TipoIngressoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.initializeForm();
-    if (this.movieId) {
-      // this.movieService.get(this.movieId).subscribe((data:Usuario) => {
-      //   this.populateForm(data);
-      // })
+    console.log(this.ingressoId)
+    if (this.ingressoId) {
+       this.ingressoService.get(this.ingressoId).subscribe((data:Tipo_Ingresso) => {
+         this.populateForm(data);
+       })
     } 
     console.log(this.formGroup);
   }
@@ -48,4 +53,24 @@ export class TicketTypeFormComponent implements OnInit {
     this.formGroup.setValue(tipo_ingresso);
   }
 
+  delete() {
+    this.ingressoService.delete(this.ingressoId).subscribe(data => {
+      window.location.reload(true);
+      console.log(data);
+    })
+  }
+
+  update() {
+    this.ingressoService.put(this.formGroup.value).subscribe(data => {
+      this.ingressoId=null;
+      window.location.reload(true);
+      
+    
+      
+      console.log(data);
+    })
+    
+  }
+ 
+  
 }

@@ -84,6 +84,7 @@ export class FilmeService {
   }
 
   put(params: Filme) {
+    console.log(params);
     return this.httpClient.put(`${api.path()}/filme/update/${params.id}`, JSON.stringify(params), {headers: this.httpHeader});
   }
 

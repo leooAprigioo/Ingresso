@@ -59,7 +59,9 @@
                 </section>
                 <section class="row justify-content-center py-3">
                     <div class="col-12">
-                        <button type="submit" class="btn w-100 raised-button">Adicionar sessão</button>
+                        <button type="submit" class="btn w-100 raised-button"*ngIf="!sessaoId">Adicionar Sala</button>
+                        <button type="submit" class="btn w-100 raised-button" (click)="update()"*ngIf="sessaoId">Atualizar Sala</button>
+                        <button type="submit" class="btn w-100 raised-button" (click)="delete()" *ngIf="sessaoId">Deletar Sala</button>
                     </div>
                 </section>
             </form>

@@ -6,6 +6,7 @@ import { EditMovieRoomComponent } from './edit-movie-room/edit-movie-room.compon
 import { RouterModule } from '@angular/router';
 import { AdminSidebarModule } from 'src/app/components/admin-sidebar/admin-sidebar.module';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { SalaService } from 'src/app/services/sala/sala.service';
 
 
 @NgModule({

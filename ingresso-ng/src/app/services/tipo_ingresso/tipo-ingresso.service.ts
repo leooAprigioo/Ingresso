@@ -19,17 +19,19 @@ export class TipoIngressoService {
     private httpClient: HttpClient,
   ) { }
 
-  list(): Observable<Tipo_Ingresso> {
+  list(): Observable<Tipo_Ingresso[]> {
     return this.httpClient.get(`${api.path()}/tipo_ingresso`)
       .pipe(
         take(1),
-        map((data: Tipo_Ingresso) => {
+        map((data: any) => {
+          return data.map((item: Tipo_Ingresso) => {
           return new Tipo_Ingresso(
-            data.id,
-            data.nome,
-            data.preco,
-            data.observacao
-          );
+            item.id,
+            item.nome,
+            item.preco,
+            item.observacao
+            );
+          }) 
         })
       );
   }
@@ -40,10 +42,10 @@ export class TipoIngressoService {
         take(1),
         map((data: Tipo_Ingresso) => {
           return new Tipo_Ingresso(
-            data.id,
-            data.nome,
-            data.preco,
-            data.observacao
+            data[0].id,
+            data[0].nome,
+            data[0].preco,
+            data[0].observacao
           );
         })
       );
@@ -55,7 +57,7 @@ export class TipoIngressoService {
   }
 
   put(params: Tipo_Ingresso) {
-    return this.httpClient.put(`${api.path()}/tipo_ingresso/update`, params);
+    return this.httpClient.put(`${api.path()}/tipo_ingresso/update/${params.id}`, JSON.stringify(params), {headers: this.httpHeader});
   }
 
   delete (id: number) {

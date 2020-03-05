@@ -10,15 +10,16 @@ def conectar():
     return sqlite3.connect('ingresso_db.sqlt')
 
 sala_app = Blueprint('sala_app', __name__)
-campos =["nome", "quantidade_fileira", "quantidade_assento", "tipo_sala"]
-tipos = {"nome":str, "quantidade_fileira":int, "quantidade_assento":int, "tipo_sala":str}
+campos =["id","nome", "quantidade_fileira", "quantidade_assento", "tipo_sala"]
+tipos = {"id":str,"nome":str, "quantidade_fileira":int, "quantidade_assento":int, "tipo_sala":str}
 
 #campos2 =["titulo", "data_lancamento", "ano", "duracao", "genero", "diretor", "atores", "sinopse", "classificacao", "idioma","pais","poster","imdb"]
 #tipos2 = {"titulo":str, "data_lancamento":str, "ano":int, "duracao":int, "genero":str, "diretor":str, "atores":str, "sinopse":str, "classificacao":int, "idioma":str,"pais":str,"poster":str,"imdb":int}
 
 
-campos3 =["id" ]
-tipos3 = {"id":int}
+
+campos3 =["id","nome", "quantidade_fileira", "quantidade_assento", "tipo_sala"]
+tipos3 = {"id":int,"nome":str, "quantidade_fileira":int, "quantidade_assento":int, "tipo_sala":str}
 
 
 @sala_app.route('/sala', methods=['GET'])
@@ -56,11 +57,12 @@ def criar():
 @sala_app.route('/sala/update/<int:id>', methods=['PUT'])
 def update(id):
     dados = request.get_json()
+    print(dados)
     with closing(conectar()) as con, closing(con.cursor()) as cur:
-        if not validar_campos(dados,campos,tipos):
+        if not validar_campos(dados,campos3,tipos3):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
         try:
-            cur.execute("UPDATE sala set nome=?,quantidade_fileira=?,quantidade_assento=?,tipo_sala=? where id=?",(dados['nome'],dados['quantidade_fileira'],dados['quantidade_assento'],dados['tipo_sala'],))
+            cur.execute("UPDATE sala set nome=?,quantidade_fileira=?,quantidade_assento=?,tipo_sala=? where id=?",(dados['nome'],dados['quantidade_fileira'],dados['quantidade_assento'],dados['tipo_sala'],id,))
             con.commit()
             return jsonify({'Mensagem':'sucesso'}),200                
         except Exception as inst:
@@ -68,7 +70,7 @@ def update(id):
       
 
 
-@sala_app.route('/sala/delete/<int:id>', methods=['POST'])
+@sala_app.route('/sala/delete/<int:id>', methods=['delete'])
 def delete(id):
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         if not (type(id)):

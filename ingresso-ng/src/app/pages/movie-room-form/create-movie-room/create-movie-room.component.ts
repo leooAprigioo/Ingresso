@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Sala } from 'src/app/models/sala';
+import { SalaService } from 'src/app/services/sala/sala.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-movie-room',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateMovieRoomComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private salaService: SalaService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  create(sala: Sala) {
+    this.salaService.post(sala).subscribe((data) =>
+      console.log(data)
+    );  this.router.navigate(['/'])
   }
 
 }

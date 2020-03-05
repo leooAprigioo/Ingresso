@@ -40,7 +40,7 @@ def localizar(id):
         return jsonify(lista)
   
 
-@usuario_app.route('/usuario/criar', methods=['POST'])
+@usuario_app.route('/usuario/criar/', methods=['POST'])
 def criar():
     dados = request.get_json()
     print

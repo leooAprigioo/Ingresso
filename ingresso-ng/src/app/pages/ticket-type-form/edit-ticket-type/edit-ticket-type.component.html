@@ -1,1 +1,39 @@
-<app-ticket-type-form [editMode]="true"></app-ticket-type-form>
+
+<main class="container-fluid" >
+    <section class="row py-2" *ngIf="lista">
+        <div class="col-3" >
+            <app-admin-sidebar></app-admin-sidebar>
+        </div>
+        <div class="col-9">
+            <section class="row align-items-center">
+                <div class="col-7">
+                    <h4 class="py-2">Lista de filmes</h4>
+                </div> 
+                <div class="col-4">
+                    <label for="search" class="mx-1">Buscar: </label>
+                    <input type="text" name="search" />
+                </div> 
+                <div class="w-100"></div>
+                <div class="col-11 bg-35363A py-2 align-self-start">
+                    <div class="row py-3 mx-2 border-bottom no-gutters align-items-center" *ngFor="let ingresso of ingresso">
+                        <div class="col-10">
+                            <h5 class="text-white mb-0">{{ ingresso.nome }} </h5>
+                            <small class="text-white">{{ ingresso.preco }} </small>
+                            <span class="circle"></span>
+                            <small class="text-white">{{ ingresso.observacao }}</small>
+                           
+                            
+                           
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn w-100 raised-button" (click)="editar(ingresso.id)" >Editar Ingresso</button>
+                            <button type="submit" class="btn w-100 raised-button" (click)="delete(ingresso.id)" *ngIf="ingressoID">Deletar Sala</button>
+                          
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</main>
+<app-ticket-type-form [editMode]="true"   [ingressoId]="ingressoID" *ngIf="ingressoID"></app-ticket-type-form>

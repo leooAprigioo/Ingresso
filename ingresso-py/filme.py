@@ -19,8 +19,8 @@ tipos = {"id": int, "titulo":str, "data_lancamento":str, "ano":int, "duracao":in
 #tipos2 = {"titulo":str, "data_lancamento":str, "ano":int, "duracao":int, "genero":str, "diretor":str, "atores":str, "sinopse":str, "classificacao":int, "idioma":str,"pais":str,"poster":str,"imdb":int}
 
 
-campos3 =["id" ]
-tipos3 = {"id":int}
+campos3 =["id", "titulo", "data_lancamento", "ano", "duracao", "genero", "diretor", "atores", "sinopse", "classificacao", "idioma","pais","poster","imdb", "em_cartaz", "banner", "trailer_url"]
+tipos3 = {"id": int, "titulo":str, "data_lancamento":str, "ano":int, "duracao":int, "genero":str, "diretor":str, "atores":str, "sinopse":str, "classificacao":int, "idioma":str,"pais":str,"poster":str,"imdb":int, "em_cartaz": int, "banner": str, "trailer_url": str }
 
 
 @filme_app.route('/filme', methods=['GET'])
@@ -85,7 +85,7 @@ def update(id):
     dados = request.get_json()
 
     with closing(conectar()) as con, closing(con.cursor()) as cur:
-        if not validar_campos(dados,campos,tipos):
+        if not validar_campos(dados,campos3,tipos3):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
         cur.execute("UPDATE filme set titulo=?,data_lancamento=?,ano=?,duracao=?,genero=?,diretor=?,atores=?,sinopse=?,classificacao=?,idioma=?,pais=?,poster=?,imdb=? where id=?",(dados['titulo'],dados['data_lancamento'],dados['ano'],dados['duracao'],dados['genero'],dados['diretor'],dados['atores'],dados['sinopse'],dados['classificacao'],dados['idioma'],dados['pais'],dados['poster'],dados['imdb'],id,))
         con.commit()

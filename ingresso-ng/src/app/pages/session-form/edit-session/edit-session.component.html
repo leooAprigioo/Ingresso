@@ -1,1 +1,43 @@
-<app-session-form [editMode]="true"></app-session-form>
+
+<main class="container-fluid" >
+    <section class="row py-2" *ngIf="lista">
+        <div class="col-3" >
+            <app-admin-sidebar></app-admin-sidebar>
+        </div>
+        <div class="col-9">
+            <section class="row align-items-center">
+                <div class="col-7">
+                    <h4 class="py-2">Lista de filmes</h4>
+                </div> 
+                <div class="col-4">
+                    <label for="search" class="mx-1">Buscar: </label>
+                    <input type="text" name="search" />
+                </div> 
+                <div class="w-100"></div>
+                <div class="col-11 bg-35363A py-2 align-self-start">
+                    <div class="row py-3 mx-2 border-bottom no-gutters align-items-center" *ngFor="let sessao of sessao">
+                        <div class="col-10">
+                            <h5 class="text-white mb-0">{{ sessao.filme_id }} </h5>
+                            <small class="text-white">{{ sessao.sala_id }}</small>
+                            <span class="circle"></span>
+                            <small class="text-white">{{ sessao.formato }}</small>
+                            <span class="circle"></span>
+                            <small class="text-white">{{ sessao.dublado }}</small>
+                            <span class="circle"></span>
+                            <small class="text-white">{{ sessao.data_horario_inicio }}</small>
+                            
+                           
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn w-100 raised-button" (click)="editar(sessao.id)" >Editar Sala</button>
+                            <button type="submit" class="btn w-100 raised-button" (click)="delete(sessao.id)" *ngIf="sessaoID">Deletar Sala</button>
+                          
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</main>
+
+<app-session-form [editMode]="true" [sessaoId]="sessaoID" *ngIf="sessaoID"></app-session-form>

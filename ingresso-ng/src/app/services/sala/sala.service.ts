@@ -28,7 +28,8 @@ export class SalaService {
               item.id,
               item.nome,
               item.quantidade_fileira,
-              item.quantidade_assento
+              item.quantidade_assento,
+              item.tipo_sala
             );
           }) 
         })
@@ -44,7 +45,8 @@ export class SalaService {
             data[0].id,
             data[0].nome,
             data[0].quantidade_fileira,
-            data[0].quantidade_assento
+            data[0].quantidade_assento,
+            data[0].tipo_sala
           );
         })
       );
@@ -56,7 +58,7 @@ export class SalaService {
   }
 
   put(params: Sala) {
-    return this.httpClient.put(`${api.path()}/sala/update`, params);
+    return this.httpClient.put(`${api.path()}/sala/update/${params.id}`, JSON.stringify(params), {headers: this.httpHeader});
   }
 
   delete (id: number) {

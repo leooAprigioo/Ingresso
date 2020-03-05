@@ -15,12 +15,13 @@ import { Filme } from 'src/app/models/filme';
 export class SessionFormComponent implements OnInit {
 
   @Input() editMode: boolean;
-  @Input() salaId : number;
+  @Input() sessaoId : number;
   @Output() submitForm = new EventEmitter<Sessao>();
 
   public formGroup: FormGroup;
   public salas : Sala[];
   public filmes: Filme[];
+  public sessao:Sessao;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,6 +32,7 @@ export class SessionFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  
     this.initializeForm();
     this.salaService.list().subscribe((data:Sala[]) => {
       this.salas = data;
@@ -39,8 +41,11 @@ export class SessionFormComponent implements OnInit {
 
     this.filmeService.list().subscribe((data: Filme[]) => this.filmes = data);
 
-    if (this.salaId) {
-      this.sessaoService.get(this.salaId).subscribe((data: Sessao) => {
+    if (this.sessaoId) {
+      console.log(this.sessaoId)
+      this.sessaoService.get(this.sessaoId).subscribe((data: Sessao) => {
+        this.sessao=data;
+        console.log(data);
         this.populateForm(data);
       })
     } 
@@ -65,6 +70,21 @@ export class SessionFormComponent implements OnInit {
 
   populateForm(sessao: Sessao) {
     this.formGroup.setValue(sessao);
+  }
+
+  delete() {
+    let sessaoString=this.sessaoId.toString()
+    this.sessaoService.delete(this.sessaoId).subscribe(data => {
+      console.log(data);
+      window.location.reload(true);
+    })
+  }
+
+  update() {
+    this.sessaoService.put(this.formGroup.value).subscribe(data => {
+      console.log(data);
+      window.location.reload(true);
+    })
   }
 
 }

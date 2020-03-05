@@ -19,21 +19,22 @@ export class SessaoService {
     private httpClient: HttpClient,
   ) { }
 
-  list(): Observable<Sessao> {
+  list(): Observable<Sessao[]> {
     return this.httpClient.get(`${api.path()}/sessao`)
       .pipe(
         take(1),
-        map((data: Sessao) => {
+        map((data: any) => {
+          return data.map((item: Sessao) => {
           return new Sessao(
-            data.id,
-            data.sala_id,
-            data.filme_id,
-            data.data_horario_inicio,
-            data.formato,
-            data.dublado
+            item.id,
+            item.sala_id,
+            item.filme_id,
+            item.data_horario_inicio,
+            item.formato,
+            item.dublado
           );
         })
-      );
+        }));
   }
 
   get(id : number): Observable<Sessao> {
@@ -41,13 +42,14 @@ export class SessaoService {
       .pipe(
         take(1),
         map((data: Sessao) => {
+          console.log(data)
           return new Sessao(
-            data.id,
-            data.sala_id,
-            data.filme_id,
-            data.data_horario_inicio,
-            data.formato,
-            data.dublado
+            data[0].id,
+            data[0].sala_id,
+            data[0].filme_id,
+            data[0].data_horario_inicio,
+            data[0].formato,
+            data[0].dublado
           );
         })
       );
@@ -59,10 +61,10 @@ export class SessaoService {
   }
 
   put(params: Sessao) {
-    return this.httpClient.put(`${api.path()}/sessao/update`, params);
+    return this.httpClient.put(`${api.path()}/sessao/update/${params.id}`, JSON.stringify(params), {headers: this.httpHeader});
   }
 
-  delete (id: Sessao) {
+  delete (id: number) {
     return this.httpClient.delete(`${api.path()}/sessao/delete/${id}`);
   }
 }
