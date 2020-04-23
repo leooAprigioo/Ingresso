@@ -21,7 +21,7 @@ const routerOptions: ExtraOptions = {
 
 const routes: Routes = [
   {path: '', component: MoviesComponent},
-  {path: 'movie', component: MovieDetailComponent},
+  {path: 'movie/:id', component: MovieDetailComponent},
   {path: 'login', component: LoginComponent},
   {path: 'create-user', component: CreateUserComponent},
   {path: 'edit-user/:id', component: EditUserComponent},

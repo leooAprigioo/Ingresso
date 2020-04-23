@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { faHome, faTicketAlt, faSignInAlt, faLock } from '@fortawesome/free-solid-svg-icons';
 import { Usuario } from 'src/app/models/usuario';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 export class NavbarComponent implements OnInit {
 
   public usuario: Usuario;
+  public isLogged: boolean;
 
   faHome = faHome;
   faTicketAlt = faTicketAlt;
@@ -18,25 +20,19 @@ export class NavbarComponent implements OnInit {
   faLock = faLock;
 
   constructor(
-    private storageService: LocalStorageService
+    private storageService: LocalStorageService,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
-    this.buildUsuario(this.storageService.getItem('usuario')[0]);
-    console.log(this.usuario);
-  }
-
-  buildUsuario(payload: any) {
-    this.usuario = new Usuario(
-      payload.id,
-      payload.nome,
-      payload.dataNascimento,
-      payload.senha,
-      payload.email,
-      payload.cpf,
-      payload.endereco,
-      payload.admin
-    )
+    this.authenticationService.loginEmitter$.subscribe(data => { 
+      console.log(data);
+      this.isLogged = data;
+      this.usuario = this.storageService.getItem('usuario')[0];
+      console.log(this.storageService.getItem('usuario'));
+      console.log(this.usuario.admin);
+      console.log(this.usuario);
+    })
   }
 
 }

@@ -1,7 +1,7 @@
 <div id="movieBannerCarousel" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active movie-banner">
-          <img [src]="movie.banner" class="d-block w-100" alt="...">
+          <img [src]=" 'http://image.tmdb.org/t/p/original/' + movie?.banner" class="d-block w-100" alt="...">
       </div>
       <div class="shadow-overlay"></div>
     </div>
@@ -9,20 +9,18 @@
 <main class="container-fluid">
     <section class="row py-2">
         <div class="col-2">
-            <img [src]="movie.poster" class="poster"/>
+            <img [src]="'http://image.tmdb.org/t/p/w342/' + movie?.poster" class="poster"/>
         </div>
         <div class="col-10">
-            <h4>{{ movie.titulo }}</h4>
-            <p>{{ movie.sinopse }}</p>
-            <app-advisory-rating [advisoryRating]="movie.classificacao" class="advisory-brand"></app-advisory-rating>
-            <h6 class="text-white poster-duracao font-weight-bold">{{ movie.duracao }} min</h6>
+            <h4>{{ movie?.titulo }}</h4>
+            <p>{{ movie?.sinopse }}</p>
+            <app-advisory-rating [advisoryRating]="movie?.classificacao ? movie?.classificacao : 0" class="advisory-brand"></app-advisory-rating>
+            <h6 class="text-white poster-duracao font-weight-bold">{{ movie?.duracao }} min</h6>
         </div>
     </section>
     <section class="row py-4 align-items-center">
         <div class="col-4">
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe [src]="getTrailerUrl()" class="embed-responsive-item"></iframe>
-            </div>
+            <app-youtube-video [videoId]="movie?.trailer_url"></app-youtube-video>
         </div>
         <div class="col-8">
             <div class="row justify-content-center align-items-center p-2">
@@ -30,28 +28,28 @@
                     <img src="assets/icons/win-red.svg" alt="" width="48" class="mx-2" />
                 </div>
                 <div class="col-4">
-                    <p class="d-inline-block m-0"><span class="font-weight-bold">Elenco: </span>{{ movie.atores }}</p>
+                    <p class="d-inline-block m-0"><span class="font-weight-bold">Elenco: </span>{{ movie?.atores ? movie?.atores : 'Não registrado' }}</p>
                 </div>
                 <div class="col-1 text-center">
                     <img src="assets/icons/film-red.svg" alt="" width="48" class="mx-2" />
                 </div>
                 <div class="col-4">
-                    <p class="d-inline-block m-0"><span class="font-weight-bold">Duração: </span>{{ movie.duracao }}min</p>
+                    <p class="d-inline-block m-0"><span class="font-weight-bold">Duração: </span>{{ movie?.duracao ? movie?.duracao + ' min' : 'Não registrado' }}</p>
                 </div>
             </div>
 
             <div class="row justify-content-center align-items-center p-2">
                 <div class="col-1 text-center">
-                    <img src="assets/icons/SeuCinema-red.svg" alt="" width="48" class="mx-2" />
+                    <img src="assets/icons/cinema-red.svg" alt="" width="48" class="mx-2" />
                 </div>
                 <div class="col-4">
-                    <p class="d-inline-block m-0"><span class="font-weight-bold">Direção: </span>{{ movie.diretor }}</p>
+                    <p class="d-inline-block m-0"><span class="font-weight-bold">Direção: </span>{{ movie?.diretor ? movie?.diretor : 'Não registrado' }}</p>
                 </div>
                 <div class="col-1 text-center">
                     <img src="assets/icons/scene-red.svg" alt="" width="48" class="mx-2" />
                 </div>
                 <div class="col-4">
-                    <p class="d-inline-block m-0"><span class="font-weight-bold">Elenco: </span>{{ movie.data_lancamento.toLocaleDateString() }}</p>
+                    <!-- <p class="d-inline-block m-0"><span class="font-weight-bold">Elenco: </span>{{ movie?.data_lancamento ? movie?.data_lancamento?.toLocaleDateString() : 'Não registrado' }}</p> -->
                 </div>
             </div>
 
@@ -60,17 +58,17 @@
                     <img src="assets/icons/theater-red.svg" alt="" width="48" class="mx-2" />
                 </div>
                 <div class="col-4">
-                    <p class="d-inline-block m-0"><span class="font-weight-bold">Genêro: </span>{{ movie.genero }}</p>
+                    <p class="d-inline-block m-0"><span class="font-weight-bold">Genêro: </span>{{ movie?.genero ? movie?.genero : 'Não registrado' }}</p>
                 </div>
                 <div class="col-1 text-center">
-                    <img src="assets/icons/age-red.svg" alt="" width="48" class="mx-2" />
+                    <img src="assets/icons/star-red.svg" alt="" width="48" class="mx-2" />
                 </div>
                 <div class="col-4">
-                    <p class="d-inline-block m-0"><span class="font-weight-bold">IMDB: </span>{{ movie.imdb }}</p>
+                    <p class="d-inline-block m-0"><span class="font-weight-bold">IMDB: </span>{{ movie?.imdb ? movie?.imdb : 'Não registrado' }}</p>
                 </div>
             </div>
             
         </div>
-    </section>
+    </section> 
     <app-movie-session></app-movie-session>
 </main>

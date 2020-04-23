@@ -16,12 +16,22 @@
             <form [formGroup]="formGroup" (submit)="submit()">
                 <h4>Entre agora com seu SeuCine.com</h4>
                 <div class="form-group my-4">
-                    <input type="text" class="form-control rounded-0" placeholder="E-mail" formControlName="email" />
+                    <input type="text" class="form-control rounded-0" placeholder="E-mail" formControlName="email" [ngClass]="submitted && !formGroup.controls.email.valid ? 'invalid-form' : '' " />
+                    <div *ngIf="submitted && !formGroup.controls.email.valid">
+                        <small class="text-danger" *ngIf="formGroup.controls.email.errors.required">E-mail obrigatório</small>
+                        <small class="text-danger" *ngIf="formGroup.controls.email.errors.email">Digíte um e-mail válido</small>
+                    </div>
+                    
                 </div>
                 <div class="form-group my-4">
-                    <input type="password" class="form-control rounded-0" placeholder="Senha" formControlName="password" />
+                    <input type="password" class="form-control rounded-0" placeholder="Senha" formControlName="password" [ngClass]="submitted && !formGroup.controls.password.valid ? 'invalid-form' : '' " />
+                    <div *ngIf="submitted && !formGroup.controls.password.valid">
+                        <small class="text-danger" *ngIf="formGroup.controls.password.errors.required">Senha obrigatória</small>
+                        <small class="text-danger" *ngIf="formGroup.controls.password.errors.minlength">A senha deve conter no minímo 8 digítos</small>
+                    </div>
                 </div>
                 <div class="form-group">
+                    <app-error-label [errorLabel]="errorLabel"></app-error-label>
                     <button type="submit" class="btn raised-button rounded">Entrar</button>
                 </div>
             </form>

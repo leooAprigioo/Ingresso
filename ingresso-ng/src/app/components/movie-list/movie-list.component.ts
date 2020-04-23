@@ -20,6 +20,8 @@ export class MovieListComponent implements OnInit {
   @Input() title: string;
   @Input() movies: Filme[];
 
+  speed : number = 15
+
   faChevronRight = faChevronRight;
 
   constructor() { }
@@ -33,7 +35,7 @@ export class MovieListComponent implements OnInit {
       if (context.checkToStopMove()) {
         context.moved -= 5;
       }
-    }, 25);
+    }, this.speed);
   }
 
   stopMoveSessionDates() {

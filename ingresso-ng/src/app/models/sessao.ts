@@ -10,10 +10,10 @@ export class Sessao {
     public dublado: boolean;
 
     constructor(
-        id: number,
-        sala_id: Sala,
-        filme_id: Filme,
-        data_horario_inicio: Date,
+        id?: number,
+        sala_id?: Sala,
+        filme_id?: Filme,
+        data_horario_inicio?: Date,
         formato: string = '2D',
         dublado: boolean = false
     ) {
@@ -23,5 +23,33 @@ export class Sessao {
         this.data_horario_inicio = data_horario_inicio;
         this.formato = formato;
         this.dublado = dublado;
+    }
+
+    static createMock(): Sessao {
+        let session = new Sessao();
+        session.id = Math.round(Math.random() * 100);
+
+        let movie = new Filme();
+        session.filme_id = movie;
+
+        let room = Sala.createMock();
+        session.sala_id = room;
+
+        let formato = ['2D', '3D'];
+        session.formato = formato[Math.round(Math.random())];
+
+        session.dublado = Math.random() > .5;
+
+        // let day = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+
+        let day = [30, 31];
+        let month = [1, 2];
+
+        let randomDay = Math.floor(Math.random() * (1 - 0 + 1) ) + 0;
+        let randomMonth = Math.floor(Math.random() * (1 - 0 + 1) ) + 0;
+
+        session.data_horario_inicio = new Date(2020, day[randomMonth], day[randomDay], 23, 10, 0);
+
+        return session;
     }
 }

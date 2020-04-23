@@ -17,10 +17,13 @@
             <li class="nav-item active mx-3">
                 <a class="nav-link text-white" routerLink="#"><fa-icon [icon]="faTicketAlt" class="pr-2"></fa-icon>Filmes</a>
             </li>
-            <li class="nav-item active mx-3">
-                <a class="nav-link text-white" routerLink="/login"><img src="assets/icons/user-white.svg" width="30" height="30" class="pr-2" />Entrar</a>
+            <li class="nav-item active mx-3" *ngIf='!isLogged'>
+                <a class="nav-link text-white" routerLink="/login"><img src="assets/icons/user-white.svg" width="30" height="26" class="pr-2" />Entrar</a>
             </li>
-            <li class="nav-item active mx-3">
+            <li class="nav-item active mx-3" *ngIf='isLogged'>
+                <a class="nav-link text-white" routerLink="/myAccount"><img src="assets/icons/user-white.svg" width="30" height="26" class="pr-2" />Minha conta</a>
+            </li>
+            <li class="nav-item active mx-3" *ngIf="isLogged">
                 <a class="nav-link text-white" routerLink="/list-movie" *ngIf="usuario.admin"><fa-icon [icon]="faLock" class="pr-2"></fa-icon>Administrador</a>
             </li>
         </ul>

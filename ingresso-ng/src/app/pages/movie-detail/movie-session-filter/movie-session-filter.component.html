@@ -1,0 +1,16 @@
+<div class="form-group form-check-inline">
+    <input type="checkbox" class="form-check-input" name="dub"[(ngModel)]="sessionMovieFilter.isDub" (change)="emitFilter()" />
+    <label class="form-check-label font-weight-bold" for="dub">DUB</label>
+</div>
+<div class="form-group form-check-inline">
+    <input type="checkbox" class="form-check-input" name="leg" [(ngModel)]="sessionMovieFilter.isLeg" (change)="emitFilter()" />
+    <label class="form-check-label font-weight-bold" for="leg">LEG</label>
+</div>
+<div class="form-group form-check-inline">
+    <input type="checkbox" class="form-check-input" name="2d" [(ngModel)]="sessionMovieFilter.is2d" (change)="emitFilter()" />
+    <label class="form-check-label font-weight-bold" for="2d">2D</label>
+</div>
+<div class="form-group form-check-inline">
+    <input type="checkbox" class="form-check-input" name="3d" [(ngModel)]="sessionMovieFilter.is3d" (change)="emitFilter()" />
+    <label class="form-check-label font-weight-bold" for="3d">3D</label>
+</div>

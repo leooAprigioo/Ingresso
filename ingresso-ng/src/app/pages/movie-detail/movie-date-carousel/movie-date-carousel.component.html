@@ -1,0 +1,15 @@
+<section class="row py-3 bg-35363A mx-2 rounded" #sessionDatesElement>
+    <div class="col-12">
+        <div class="row flex-nowrap overflow-hidden">
+            <div class="col-1 session-date-item" *ngFor="let session of sessions; let i = index" [ngClass]="{'session-date-item--active': activated[i]}" [ngStyle]="{'transform': 'translateX(' + moved + 'px)'}" #sessionElement>
+                <a class="session-date d-inline-block mx-2" (click)="selectDate(session.data_horario_inicio, i)">
+                    <h4 class="text-center text-b3414b m-0">{{ getWeekDay(session) }}</h4>
+                    <small class="m-0 text-center text-white d-block">{{ getShortDate(session) }}</small>
+                </a>
+            </div>
+            <span class="session-arrow-icon p-2" #arrowButtonElement>
+                <fa-icon [icon]="faChevronRight" size='2x' class="text-b3414b" (mouseout)="stopMoveSessionDates()" (mouseover)="moveSessionDates()" ></fa-icon>
+            </span>
+        </div>
+    </div>
+</section>

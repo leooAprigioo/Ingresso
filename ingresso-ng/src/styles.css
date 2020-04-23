@@ -23,6 +23,11 @@
     font-style: italic;
 }
 
+.btn:focus,.btn:active, input.form-control:focus, text-area.form-control:focus, select.form-control:focus {
+    border-color: #ddd;
+    box-shadow: none;
+ }
+
 body, html {
     margin: 0;
     padding: 0;
@@ -92,4 +97,9 @@ body, html {
 
 .subtitle {
     font-size: 0.9rem;
+}
+
+.invalid-form {
+    border-color: #c14141;
+    box-shadow: 0px 0px 4px #c14141;
 }

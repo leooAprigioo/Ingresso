@@ -1,0 +1,17 @@
+.session {
+    border-width: 2px!important;
+    border-color: #b3414b!important;
+    text-decoration: none;
+    cursor: pointer;
+    color: #FFF;
+}
+
+.session:hover {
+    color: #b3414b;
+    transform: translateX(10px);
+    transition: all 0.2s ease;
+}
+
+.session-format {
+    font-size: .8rem;
+}

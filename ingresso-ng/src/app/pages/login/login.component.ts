@@ -6,29 +6,44 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { Usuario } from 'src/app/models/usuario';
+import { iErrorLabel } from 'src/app/interfaces/iErrorLabel';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
 export class LoginComponent implements OnInit {
 
   faArrowRight = faArrowRight;
-
+  submitted = false;
   formGroup: FormGroup;
+
+  errorLabel : iErrorLabel[];
+
   constructor(
     private formBuilder: FormBuilder,
-    private usuarioService: UsuarioService,
+    private authenticationService: AuthenticationService,
     private localStorageService: LocalStorageService,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.initializeForm();
+    this.errorLabel = [
+      { label: 'E-mail ou senha inválidos', status: false, receiveMessage: 'usuario não encontrado', statusCode:400 },
+      { label: 'Erro de servidor. Contate o administrador da plataforma', status: false, receiveMessage: '', statusCode:500 }
+    ]
+    console.log(this.formGroup);
   }
 
   submit() {
-    console.log(this.formGroup);
+    console.log(this.formGroup.controls.password.errors);
+    this.submitted = true;
     if (!this.formGroup.valid) {
       return false;
     }
@@ -37,16 +52,11 @@ export class LoginComponent implements OnInit {
     const password = this.formGroup.controls.password.value;
 
     console.log(email, password);
-    this.usuarioService.auth(email, password).subscribe(
-      (data: Usuario) => {
-        this.localStorageService.setItem('usuario', data);
+    this.authenticationService.auth(email, password).subscribe(
+      (data: boolean) => {
         this.router.navigate(['/'])
-
       },
-      (err => console.log(err))
-      );
-
-    
+      (err => this.verifyResponseErrors(err)));
   }
 
   initializeForm() {
@@ -54,6 +64,10 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
+  }
+
+  verifyResponseErrors (errorValue:HttpErrorResponse) {
+    this.errorLabel = this.errorLabel.map((value) => { value.receiveMessage === errorValue.error.Mensagem ? value.status = true : value.status = false; console.log(this.errorLabel); return value })
   }
 
 }

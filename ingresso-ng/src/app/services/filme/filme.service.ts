@@ -92,4 +92,66 @@ export class FilmeService {
     return this.httpClient.delete(`${api.path()}/filme/delete/${id}`);
   }
 
+  listReleasedMovies(): Observable<Filme[]> {
+    return this.httpClient.get(`${api.path()}/filme/emcartaz`)
+      .pipe(
+        take(1),
+        map((data: any) => {
+          return data.map(
+            (item: Filme) => {
+              return new Filme(
+                item.id,
+                item.titulo,
+                item.data_lancamento,
+                item.ano,
+                item.duracao,
+                item.genero,
+                item.diretor,
+                item.atores,
+                item.sinopse,
+                item.classificacao,
+                item.idioma,
+                item.pais,
+                item.imdb,
+                item.poster,
+                item.banner,
+                item.trailer_url
+              );
+            })
+          
+        })
+      );
+  }
+
+  listMoviesToRelease(): Observable<Filme[]> {
+    return this.httpClient.get(`${api.path()}/filme/estreia`)
+      .pipe(
+        take(1),
+        map((data: any) => {
+          return data.map(
+            (item: Filme) => {
+              return new Filme(
+                item.id,
+                item.titulo,
+                item.data_lancamento,
+                item.ano,
+                item.duracao,
+                item.genero,
+                item.diretor,
+                item.atores,
+                item.sinopse,
+                item.classificacao,
+                item.idioma,
+                item.pais,
+                item.imdb,
+                item.poster,
+                item.banner,
+                item.trailer_url
+              );
+            })
+          
+        })
+      );
+  }
+
 }

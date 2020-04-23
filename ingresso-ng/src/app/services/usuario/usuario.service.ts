@@ -70,12 +70,6 @@ export class UsuarioService {
     return this.httpClient.delete(`${api.path()}/usuario/delete/${id}`);
   }
 
-  auth(email, password) {
-    const httpParams = new HttpParams()
-      .set('email', email)
-      .set('senha', password);
 
-    return this.httpClient.get(`${api.path()}/login/${email}/${password}`, {headers: this.httpHeader});
-  }
 
 }
