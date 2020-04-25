@@ -5,7 +5,7 @@ from infra.validar import validar_campos
 from contextlib import closing
 from infra.to_dict import rows_to_dict, row_to_dict ,to_dict_list
 from datetime import datetime
-now = datetime.now()
+now = datetime.now().isoformat(timespec='minutes')
 
 filme_db = []
 def conectar():
@@ -117,7 +117,8 @@ def emcartaz():
 @filme_app.route('/filme/estreia', methods=['GET'])
 def estreia():
      with closing(conectar()) as con, closing(con.cursor()) as cur:
-        cur.execute("SELECT * FROM filme where data_lancamento > ?",now)
+        print(now)
+        cur.execute("SELECT * FROM filme where data_lancamento > ?", (now,))
         con.commit()
         acabou=False
         while not acabou:
