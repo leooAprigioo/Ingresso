@@ -1,0 +1,27 @@
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <p class="mb-0 text-white">Agora escolha os tipos de ingresso para os assentos selectionados</p>
+        </div>
+    </div>
+    <div class="row mt-2 justify-content-center align-items-center ticket-type" *ngFor="let type of ticketType">
+        <div class="col-10">
+            <h5 class="mb-0 text-white">{{ type.nome }}</h5>
+            <small class="mb-0 text-white">{{ type.preco | currency:'R$' }}</small>
+        </div>
+        <div class="col-2">
+            <select (change)="addQuantity($event.target.value, type)" [value]="getQuantity(ticket, type)" class="ml-auto">
+                <option value="0">Quantidade</option>
+                <option [value]="opt" *ngFor="let opt of [1, 2, 3, 4, 5, 6, 7, 8, 9]">{{ opt }}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mt-4 align-items-center">
+        <div class="col-3">
+            <h5 class="text-white mb-0">{{ getTotalPrice() | currency:'R$' }}</h5>
+        </div>
+        <div class="col-2 offset-7">
+            <button type="button" class="retangle-button" (click)="submit()">Proximo</button>
+        </div>
+    </div>
+</section>

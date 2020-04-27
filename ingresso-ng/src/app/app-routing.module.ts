@@ -14,6 +14,9 @@ import { EditMovieRoomComponent } from './pages/movie-room-form/edit-movie-room/
 import { CreateTicketTypeComponent } from './pages/ticket-type-form/create-ticket-type/create-ticket-type.component';
 import { EditTicketTypeComponent } from './pages/ticket-type-form/edit-ticket-type/edit-ticket-type.component';
 import { ListMovieComponent } from './pages/list-movie/list-movie.component';
+import { BuyTicketComponent } from './pages/buy-ticket/buy-ticket.component';
+import { TicketSeatComponent } from './pages/buy-ticket/ticket-seat/ticket-seat.component';
+import { TicketTypeComponent } from './pages/buy-ticket/ticket-type/ticket-type.component';
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: 'enabled',
@@ -21,7 +24,10 @@ const routerOptions: ExtraOptions = {
 
 const routes: Routes = [
   {path: '', component: MoviesComponent},
-  {path: 'movie/:id', component: MovieDetailComponent},
+  {
+    path: 'movie/:id', 
+    component: MovieDetailComponent
+  },
   {path: 'login', component: LoginComponent},
   {path: 'create-user', component: CreateUserComponent},
   {path: 'edit-user/:id', component: EditUserComponent},
@@ -33,7 +39,15 @@ const routes: Routes = [
   {path: 'create-movie-room', component: CreateMovieRoomComponent},
   {path: 'edit-movie-room/:id', component: EditMovieRoomComponent},
   {path: 'create-ticket-type', component: CreateTicketTypeComponent},
-  {path: 'edit-ticket-type/:id', component: EditTicketTypeComponent}
+  {path: 'edit-ticket-type/:id', component: EditTicketTypeComponent},
+  {
+    path: 'buy-ticket', 
+    component: BuyTicketComponent,
+    children: [
+      {path: 'seat', component: TicketSeatComponent, data: {animation: 'seat'}},
+      {path: 'type', component: TicketTypeComponent, data: {animation: 'type'}},
+    ]
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,12 @@
+<section class="container-fluid my-2">
+    <div class="row py-3 bg-35363A mx-2 rounded">
+        <div class="col-2 step" *ngFor="let step of steps" [ngClass]="{'step--active': checkIsActive(step)}">
+            <a (click)="changeStep(step)" class="mb-0 step-link">{{step.position}}.{{ step.label }}</a>
+        </div>
+    </div>
+    <div class="row py-3 bg-35363A m-2 rounded">
+        <div class="col-12 step-content px-0" [@changeStep]="o.activatedRouteData? o.activatedRouteData['animation'] : ''">
+            <router-outlet #o="outlet"></router-outlet>
+        </div>
+    </div>
+</section>

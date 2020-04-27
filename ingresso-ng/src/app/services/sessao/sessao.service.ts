@@ -5,6 +5,7 @@ import { take, map } from 'rxjs/operators';
 import { api } from '../../config/global-config';
 import { Sessao } from 'src/app/models/sessao';
 import { Observable } from 'rxjs';
+import { Filme } from 'src/app/models/filme';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,25 @@ export class SessaoService {
           );
         })
       );
+  }
+
+  getByMovie(filme: Filme): Observable<Sessao[]> {
+    return this.httpClient.get(`${api.path()}/sessao/porFilme/${filme.id}`)
+      .pipe(
+        take(1),
+        map((data: Sessao[]) => {
+          console.log(data)
+          return data.map(sessao => {
+            return new Sessao(
+              sessao.id,
+              sessao.sala_id,
+              sessao.filme_id,
+              new Date(sessao.data_horario_inicio),
+              sessao.formato,
+              sessao.dublado
+            );
+        })
+      }))
   }
 
   post(params: Sessao) {

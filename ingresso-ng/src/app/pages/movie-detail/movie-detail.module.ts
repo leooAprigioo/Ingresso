@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MovieSessionFilterComponent } from './movie-session-filter/movie-session-filter.component';
 import { FormsModule } from '@angular/forms';
 import { MovieSessionsAvailableComponent } from './movie-sessions-available/movie-sessions-available.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -30,7 +31,8 @@ import { MovieSessionsAvailableComponent } from './movie-sessions-available/movi
     YoutubeVideoModule,
     AdvisoryRatingModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ]
 })
 export class MovieDetailModule { }

@@ -18,7 +18,8 @@ export class MovieSessionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.loadSessions();
+    // this.loadSessions();
+    console.log(this.sessions)
   }
 
   loadSessions() {

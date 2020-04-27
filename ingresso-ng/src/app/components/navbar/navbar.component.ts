@@ -28,10 +28,10 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.loginEmitter$.subscribe(data => { 
       console.log(data);
       this.isLogged = data;
-      this.usuario = this.storageService.getItem('usuario')[0];
-      console.log(this.storageService.getItem('usuario'));
-      console.log(this.usuario.admin);
-      console.log(this.usuario);
+      // this.usuario = this.storageService.getItem('usuario')[0];
+      // console.log(this.storageService.getItem('usuario'));
+      // console.log(this.usuario.admin);
+      // console.log(this.usuario);
     })
   }
 

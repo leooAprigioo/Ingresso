@@ -67,8 +67,7 @@
                     <p class="d-inline-block m-0"><span class="font-weight-bold">IMDB: </span>{{ movie?.imdb ? movie?.imdb : 'Não registrado' }}</p>
                 </div>
             </div>
-            
         </div>
     </section> 
-    <app-movie-session></app-movie-session>
+    <app-movie-session [sessions]="sessions"></app-movie-session>
 </main>

@@ -1,0 +1,28 @@
+.step {
+    border-bottom: 1px solid #FFF;
+    color: #FFF;
+    text-align: center;
+}
+
+.step-link {
+    text-decoration: none;
+    font-size: .9rem;
+}
+
+.step .step-link {
+    cursor: pointer;
+    color: #FFF;
+}
+
+.step--active {
+    color: #b3414b;
+    border-bottom: 1px solid #b3414b;
+}
+
+.step--active .step-link {
+    color: #b3414b;
+}
+
+.step-content {
+    /* min-height: 20rem; */
+}
