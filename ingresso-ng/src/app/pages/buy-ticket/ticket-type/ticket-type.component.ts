@@ -3,7 +3,9 @@ import { Ingresso } from 'src/app/models/ingresso';
 import { TipoIngressoService } from 'src/app/services/tipo_ingresso/tipo-ingresso.service';
 import { Tipo_Ingresso } from 'src/app/models/tipo_ingresso';
 import { iTicketQuantity } from 'src/app/interfaces/iTicketQuantity';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SessaoService } from 'src/app/services/sessao/sessao.service';
+import { Sessao } from 'src/app/models/sessao';
 
 @Component({
   selector: 'app-ticket-type',
@@ -15,10 +17,13 @@ export class TicketTypeComponent implements OnInit {
   public ticket: Ingresso[];
   public ticketType: Tipo_Ingresso[];
   public selectTickets: iTicketQuantity[] = [];
+  public session: Sessao;
 
   constructor(
     private tipoIngressoService: TipoIngressoService,
+    private sessaoService: SessaoService,
     private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -28,8 +33,18 @@ export class TicketTypeComponent implements OnInit {
     }
 
     this.loadTicketType();
-    console.log(this.ticket);
-    console.log(history.state)
+
+    this.activatedRoute.parent.params.subscribe(param => {
+      this.loadSession(param['sessionId']);
+    })
+
+  }
+
+  loadSession(id: number) {
+    this.sessaoService.get(id).subscribe(data => {
+      this.session = data;
+      console.log(this.session)
+    })
   }
 
   buildTickets() {
@@ -81,12 +96,13 @@ export class TicketTypeComponent implements OnInit {
         let newTicket = new Ingresso();
         newTicket.data_compra = new Date();
         newTicket.tipo_ingresso = ticket.tickets;
+        newTicket.sessao = this.session;
         tickets.push(newTicket)    
       }
     });
   
     history.replaceState({data: tickets}, '');
-    this.router.navigate(['/buy-ticket', 'seat'], {state: {data: tickets}})
+    this.router.navigate(['../seat'], {state: {data: tickets}, relativeTo: this.activatedRoute})
   
   }
 

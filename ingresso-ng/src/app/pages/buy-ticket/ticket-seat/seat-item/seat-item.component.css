@@ -1,0 +1,26 @@
+.seat {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+    color: #908e8e;
+}
+
+.seat:hover {
+    color: #908e8e;
+}
+
+.seat--available {
+    color: #22a54b
+}
+
+.seat--unavailable {
+    color: #908e8e;
+    cursor: default;
+}
+
+.seat--available:hover {
+    transition: all .2s ease;
+    transform: scale(1.1);
+    color: #22a54b;
+}

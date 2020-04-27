@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Ingresso } from 'src/app/models/ingresso';
+import { SalaService } from 'src/app/services/sala/sala.service';
+import { Sala } from 'src/app/models/sala';
 
 @Component({
   selector: 'app-ticket-seat',
@@ -7,10 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TicketSeatComponent implements OnInit {
 
-  constructor() { }
+  public tickets: Ingresso[]
+  public room: Sala;
+
+  constructor(
+    private salaService: SalaService
+  ) { }
 
   ngOnInit() {
-    console.log(history.state)
+    if (history.state.data) {
+      this.tickets = history.state.data;
+      if (this.tickets.length > 0) {
+        this.loadRoom()
+      }
+      console.log(this.tickets)
+    }
   }
 
+  loadRoom() {
+    this.salaService.get(this.tickets[0].sessao.sala_id.id).subscribe(data => {
+      this.room = data;
+      console.log(this.room)
+    });
+  }
 }

@@ -6,6 +6,7 @@ import { api } from '../../config/global-config';
 import { Sessao } from 'src/app/models/sessao';
 import { Observable } from 'rxjs';
 import { Filme } from 'src/app/models/filme';
+import { Sala } from 'src/app/models/sala';
 
 @Injectable({
   providedIn: 'root'
@@ -44,14 +45,17 @@ export class SessaoService {
         take(1),
         map((data: Sessao) => {
           console.log(data)
-          return new Sessao(
-            data[0].id,
-            data[0].sala_id,
-            data[0].filme_id,
-            data[0].data_horario_inicio,
-            data[0].formato,
-            data[0].dublado
-          );
+
+          let session = new Sessao();
+          
+          session.id = data[0].id;
+          session.sala_id = new Sala(data[0].sala_id);
+          session.filme_id = new Filme(data[0].filme_id);
+          session.data_horario_inicio = data[0].data_horario_inicio;
+          session.formato = data[0].formato;
+          session.dublado = data[0].dublado;
+
+          return session
         })
       );
   }

@@ -14,8 +14,6 @@ import { MovieSessionsAvailableComponent } from './movie-sessions-available/movi
 import { RouterModule } from '@angular/router';
 
 
-
-
 @NgModule({
   declarations: [
     MovieDetailComponent, 

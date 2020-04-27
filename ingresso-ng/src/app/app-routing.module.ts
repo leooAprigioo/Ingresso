@@ -41,7 +41,7 @@ const routes: Routes = [
   {path: 'create-ticket-type', component: CreateTicketTypeComponent},
   {path: 'edit-ticket-type/:id', component: EditTicketTypeComponent},
   {
-    path: 'buy-ticket', 
+    path: 'buy-ticket/:sessionId', 
     component: BuyTicketComponent,
     children: [
       {path: 'seat', component: TicketSeatComponent, data: {animation: 'seat'}},

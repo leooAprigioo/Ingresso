@@ -59,23 +59,27 @@ export class StepperComponent implements OnInit {
   }
 
   changeStep(step: Step) {
-    
     if (history.state.data) {
-      this.router.navigate(['buy-ticket', step.route], {state: {data: history.state.data} }) 
+      this.router.navigate([this.getActivatedUrl(), step.route], {state: {data: history.state.data} }) 
     } else {
-      this.router.navigate(['buy-ticket', step.route], {state: this.state})
+      this.router.navigate([this.getActivatedUrl(), step.route], {state: this.state})
     }
 
   }
 
   checkIsActive(step: Step) {
+    return this.router.isActive(this.getActivatedUrl() + '/' + step.route, true)
+  }
+
+  getActivatedUrl() {
     let urls = "";
     this.activatedRoute.url.subscribe(url => {
       url.forEach(_ => {
         urls += '/' + _.path
       })
-    })
-    return this.router.isActive(urls + '/' + step.route, true)
+    });
+
+    return urls;
   }
 
 }
