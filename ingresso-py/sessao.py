@@ -37,6 +37,22 @@ def localizar(id):
         con.commit()
         lista = rows_to_dict(cur.description, cur.fetchall())
         return jsonify(lista)
+
+@sessao_app.route('/sessao/porFilme/<int:id_filme>', methods=['GET'])
+def localizarPorFilme(id_filme):
+    with closing(conectar()) as con, closing(con.cursor()) as cur:
+        cur.execute("select * from sessao where filme_id = ? and data_horario_inicio >= current_timestamp order by data_horario_inicio asc",(id_filme,))
+        con.commit()
+        lista = rows_to_dict(cur.description, cur.fetchall())
+        return jsonify(lista)
+
+@sessao_app.route('/sessao/poltronaIndisponivel/<int:id_sessao>', methods=['GET'])
+def localizarPoltronaIndisponivel(id_sessao):
+    with closing(conectar()) as con, closing(con.cursor()) as cur:
+        cur.execute("select poltrona from ingresso where sessao_id = ?",(id_sessao,))
+        con.commit()
+        lista = rows_to_dict(cur.description, cur.fetchall())
+        return jsonify(lista)
   
 
 @sessao_app.route('/sessao/criar', methods=['POST'])

@@ -1,3 +1,46 @@
-<a class="seat seat--available">
-    <fa-icon [icon]="faChair"></fa-icon>
+
+<a class="seat" [ngClass]="{'seat--available': available && !selectedSeat, 'seat--unavailable': !available && !selectedSeat, 'seat--selected': available && selectedSeat}" (click)="openModal()">
+    <fa-icon [icon]="faSquare" class="fa-lg"></fa-icon>
 </a>
+
+<div class="modal fade" id="seatItemModal{{ position }}" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Selecione o ingresso</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body container-fluid">
+          <div class="row">
+              <div class="col-12">
+                  <h5>Assento: {{ position }}</h5>
+              </div>
+          </div>
+          <div class="row type my-2 align-items-center" *ngFor="let type of ticketType">
+              <div class="col-1">
+                <div class="form-check">
+                    <input type="radio" name="ticketType" class="form-check-input" (change)="selectType(type)">
+                </div>
+              </div>
+              <div class="col-8">
+                    <h6 class="mb-0">{{ type.nome }}</h6>
+                    <small>{{ type.observacao }}</small>
+              </div>
+              <div class="col-3">
+                <h6>{{type.preco | currency:'R$' }}</h6>
+              </div>
+              <div class="col-11 offset-1">
+                <div class="dropdown-divider"></div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-danger" (click)="selected(false)" *ngIf="selectedSeat">Remover</button>
+          <button type="button" class="btn btn-success" (click)="selected(true)">Selecionar</button>
+        </div>
+      </div>
+    </div>
+  </div>

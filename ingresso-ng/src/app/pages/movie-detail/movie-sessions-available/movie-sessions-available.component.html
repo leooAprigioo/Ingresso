@@ -3,7 +3,7 @@
         <div class="col-3 mb-2" *ngFor="let sessionRoom of getFilteredSession()">
             <h4 class="text-white d-inline-block font-weight-bold">{{ sessionRoom.roomName }}</h4>
             <div>
-                <a [routerLink]="['/buy-ticket', session.id, 'type']" *ngFor="let session of sessionRoom.sessions" class="py-1 px-4 m-2 shadow border rounded text-b3414b font-weight-bold d-inline-block session">
+                <a [routerLink]="['/buy-ticket', session.id, 'seat']" *ngFor="let session of sessionRoom.sessions" class="py-1 px-4 m-2 shadow border rounded text-b3414b font-weight-bold d-inline-block session">
                     <p class="mb-0">{{ getHoursWithoutSec(session.data_horario_inicio) }}</p>
                     <p class="mb-0 d-inline-block mr-1 session-format">{{ session.dublado ? 'Dub' : 'Leg'}}</p>
                     <p class="mb-0 d-inline-block session-format">{{ session.formato === '3D' ? '3D' : '' }}</p>

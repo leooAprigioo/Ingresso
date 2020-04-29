@@ -30,6 +30,7 @@ export class TicketTypeComponent implements OnInit {
     if (history.state.data) {
       this.ticket = history.state.data;
       this.buildTickets();
+      console.log(history.state)
     }
 
     this.loadTicketType();

@@ -12,3 +12,27 @@
     height: 1.5rem;
     background-color: #b2414b;
 }
+
+.legend {
+    width: .5rem;
+    height: .5rem;
+    background-color: #908e8e;
+    display: inline-block;
+}
+
+.legend--unavailable{
+    background-color: #908e8e;
+}
+
+.legend--available{
+    background-color: #22a54b;
+}
+
+.legend--selected{
+    background-color: #ff9800;
+}
+
+.vertical-align-center {
+    display: flex;
+    align-items: center;
+}

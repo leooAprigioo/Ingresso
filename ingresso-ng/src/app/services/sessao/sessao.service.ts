@@ -79,6 +79,16 @@ export class SessaoService {
       }))
   }
 
+  getUnavailableSeat(session: Sessao): Observable<string[]> {
+    return this.httpClient.get(`${api.path()}/sessao/poltronaIndisponivel/${session.id}`)
+      .pipe(
+        take(1),
+        map((data: any[]) => {
+          console.log(data)
+          return data.map(item => item.poltrona)
+      }));
+  }
+
   post(params: Sessao) {
     console.log(params);
     return this.httpClient.post(`${api.path()}/sessao/criar`, JSON.stringify(params), {headers: this.httpHeader});

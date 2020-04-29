@@ -6,6 +6,7 @@ import { TicketSeatComponent } from './ticket-seat/ticket-seat.component';
 import { TicketTypeComponent } from './ticket-type/ticket-type.component';
 import { SeatItemComponent } from './ticket-seat/seat-item/seat-item.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -14,8 +15,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     StepperModule,
-    FontAwesomeModule
-
+    FontAwesomeModule,
+    FormsModule
   ],
   exports: [
     BuyTicketComponent,
