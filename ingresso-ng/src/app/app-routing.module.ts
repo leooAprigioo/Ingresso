@@ -17,6 +17,8 @@ import { ListMovieComponent } from './pages/list-movie/list-movie.component';
 import { BuyTicketComponent } from './pages/buy-ticket/buy-ticket.component';
 import { TicketSeatComponent } from './pages/buy-ticket/ticket-seat/ticket-seat.component';
 import { TicketTypeComponent } from './pages/buy-ticket/ticket-type/ticket-type.component';
+import { TicketPaymentComponent } from './pages/buy-ticket/ticket-payment/ticket-payment.component';
+import { ConfirmOrderComponent } from './pages/buy-ticket/confirm-order/confirm-order.component';
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: 'enabled',
@@ -46,6 +48,9 @@ const routes: Routes = [
     children: [
       {path: 'seat', component: TicketSeatComponent, data: {animation: 'seat'}},
       {path: 'type', component: TicketTypeComponent, data: {animation: 'type'}},
+      {path: 'payment', component: TicketPaymentComponent, data: {animation: 'payment'}},
+      {path: 'confirm', component: ConfirmOrderComponent, data: {animation: 'confirm'}},
+
     ]
   },
 ];

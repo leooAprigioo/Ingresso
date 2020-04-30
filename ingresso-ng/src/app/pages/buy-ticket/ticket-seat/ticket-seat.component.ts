@@ -9,13 +9,32 @@ import { SessaoService } from 'src/app/services/sessao/sessao.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Sessao } from 'src/app/models/sessao';
 import { iSelectedSeat } from 'src/app/interfaces/iSelectedSeat';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 (window as any).Popper = Popper;
 declare var $: any;
 @Component({
   selector: 'app-ticket-seat',
   templateUrl: './ticket-seat.component.html',
-  styleUrls: ['./ticket-seat.component.css']
+  styleUrls: ['./ticket-seat.component.css'],
+  animations: [
+    trigger(
+      'showCanvas', [
+        transition(':enter', [
+          style({
+            opacity: 0,
+            minHeight: '0px',
+            maxHeight: '0px'
+          }),
+          animate('1s', style({
+            opacity: 1,
+            minHeight: '20rem',
+            maxHeight: '999999rem'
+          }))
+        ])
+      ]
+    )
+  ]
 })
 export class TicketSeatComponent implements OnInit {
 
@@ -37,7 +56,7 @@ export class TicketSeatComponent implements OnInit {
   ngOnInit() {
 
     if (history.state.data) {
-      // this.ticket = history.state.data;
+      this.tickets = history.state.data;
       console.log(history.state)
     }
 
@@ -100,6 +119,10 @@ export class TicketSeatComponent implements OnInit {
     return !this.unavailableSeats.includes(position);
   }
 
+  checkIsSelected(position: string) {
+    return this.tickets.find(ticket => ticket.poltrona == position);
+  }
+
   getRow() {
     return this.seatsPosition.slice(0, this.room.quantidade_fileira);
   }
@@ -120,7 +143,7 @@ export class TicketSeatComponent implements OnInit {
   onSubmit() {
     this.buildTickets();
 
-    this.router.navigate(['../type'], {state: {data: this.tickets}, relativeTo: this.activatedRoute})
+    this.router.navigate(['../payment'], {state: {data: this.tickets}, relativeTo: this.activatedRoute})
   }
 
   buildTickets() {

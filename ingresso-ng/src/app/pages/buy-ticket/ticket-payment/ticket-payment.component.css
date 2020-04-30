@@ -1,0 +1,43 @@
+.collapseButton {
+    cursor: pointer;
+    border-bottom: 1px solid #b3414b;
+}
+
+.payment-input {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: none;
+}
+
+.payment-input option {
+    color: #35363a;
+}
+
+.payment-input:focus {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.1);
+    transition: all .2s ease;
+}
+
+.important-icon-wrapper {
+    border-radius: 50%;
+    background: #2196F3;
+    width: 4rem;
+    height: 4rem;
+    display: inline-block;
+}
+
+.important-icon {
+    display: block;
+    line-height: 4rem;
+    text-align: center;
+    color: #f1f1f1;
+}
+
+.bankNotification {
+    background: rgba(255, 255, 255, 0.05);
+    width: fit-content;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 5px;
+    padding: 1rem;
+}

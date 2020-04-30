@@ -14,7 +14,7 @@ export class SeatItemComponent implements OnInit {
   public faSquare = faSquare;
 
   public selectedType: Tipo_Ingresso;
-  public selectedSeat: boolean = false;
+  @Input() selectedSeat: boolean = false;
 
   @Input() position: string;
   @Input() ticketType: Tipo_Ingresso[];

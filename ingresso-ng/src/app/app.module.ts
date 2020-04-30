@@ -18,6 +18,7 @@ import { TicketTypeFormModule } from './pages/ticket-type-form/ticket-type-form.
 import { ListMovieModule } from './pages/list-movie/list-movie.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BuyTicketModule } from './pages/buy-ticket/buy-ticket.module';
+import { DirectivesModule } from './directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { BuyTicketModule } from './pages/buy-ticket/buy-ticket.module';
     FooterModule,
     RouterModule,
     HttpClientModule,
-    BuyTicketModule
+    BuyTicketModule,
+    DirectivesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

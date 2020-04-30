@@ -1,0 +1,176 @@
+
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <h5 class="mb-0 text-white">Escolha a forma de pagamento</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h6 class="text-white">Total a pagar: {{ getTotalPrice() | currency:'R$' }}</h6>
+        </div>
+    </div>
+
+    <div class="row collapseButton align-items-center pb-2 mx-1 my-2" data-toggle="collapse" href="#creditCardCollapse" role="button" aria-expanded="false" aria-controls="creditCardCollapse">
+        <div class="col-11 px-0">
+            <h6 class="text-white mb-0">Cartão de Crédito</h6>
+        </div>
+        <div class="col-1">
+            <fa-icon [icon]="faSortDown" class="fa-lg text-white d-block text-right"></fa-icon>
+        </div>
+    </div>
+    <form [formGroup]="creditCardForm" (submit)="submitCreditCard()">
+        <div class="row collapse show align-items-center" id="creditCardCollapse">
+            <div class="col-12 form-group">
+                <input type="text" class="form-control payment-input" placeholder="Nome Impresso no Cartão" oninput="this.value = this.value.toUpperCase();" formControlName="name">
+            </div>
+            <div class="col-6 form-group">
+                <input type="text" class="form-control payment-input" placeholder="Número do cartão" appCreditCard maxlength="19" formControlName="number">
+            </div>
+            <div class="col-2 form-group">
+                <input type="text" class="form-control payment-input" placeholder="CVC" appOnlyNumber maxlength="3" formControlName="cvc">
+            </div>
+            <div class="col-1 mr-2">
+                <p class="text-white font-weight-bold">Parcelas: </p>
+            </div>
+            <div class="col-2 form-group">
+                <select class="form-control payment-input" formControlName="parcel">
+                    <option value="">Parcelas</option>
+                    <option value="1">01 - À vista</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <p class="text-white font-weight-bold">Validade: </p>
+            </div>
+            <div class="col-2 form-group">
+                <select class="form-control payment-input" formControlName="month">
+                    <option value="">Mês</option>
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
+                    <option value="7">07</option>
+                    <option value="8">08</option>
+                    <option value="9">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="col-2 form-group">
+                <select class="form-control payment-input" formControlName="year">
+                    <option value="">Ano</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2030">2030</option>
+
+                </select>
+            </div>
+            <div class="col-4 offset-2 my-2">
+                <button type="submit" class="retangle-button ml-auto">Ir para a confirmação</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="row collapseButton align-items-center pb-2 mx-1 my-2" data-toggle="collapse" href="#debitCardCollapse" role="button" aria-expanded="false" aria-controls="debitCardCollapse">
+        <div class="col-11 px-0">
+            <h6 class="text-white mb-0">Cartão de Débito</h6>
+        </div>
+        <div class="col-1">
+            <fa-icon [icon]="faSortDown" class="fa-lg text-white d-block text-right"></fa-icon>
+        </div>
+    </div>
+    <form [formGroup]="debitCardForm" (submit)="submitDebitCard()">
+        <div class="row collapse align-items-center" id="debitCardCollapse">
+            <div class="col-12 form-group">
+                <input type="text" class="form-control payment-input" placeholder="Nome Impresso no Cartão" oninput="this.value = this.value.toUpperCase();" formControlName="name">
+            </div>
+            <div class="col-6 form-group">
+                <input type="text" class="form-control payment-input" placeholder="Número do cartão" appCreditCard maxlength="19" formControlName="number">
+            </div>
+            <div class="col-2 form-group">
+                <input type="text" class="form-control payment-input" placeholder="CVC" appOnlyNumber maxlength="3" formControlName="cvc">
+            </div>
+            <div class="w-100"></div>
+            <div class="col-2">
+                <p class="text-white font-weight-bold">Validade: </p>
+            </div>
+            <div class="col-2 form-group">
+                <select class="form-control payment-input" formControlName="month">
+                    <option value="">Mês</option>
+                    <option value="1">01</option>
+                    <option value="2">02</option>
+                    <option value="3">03</option>
+                    <option value="4">04</option>
+                    <option value="5">05</option>
+                    <option value="6">06</option>
+                    <option value="7">07</option>
+                    <option value="8">08</option>
+                    <option value="9">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="col-2 form-group">
+                <select class="form-control payment-input" formControlName="year">
+                    <option value="">Ano</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2030">2030</option>
+
+                </select>
+            </div>
+            <div class="col-4 offset-2 my-2">
+                <button type="submit" class="retangle-button ml-auto">Ir para a confirmação</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row collapseButton align-items-center pb-2 mx-1 my-2" data-toggle="collapse" href="#bankCollapseButton" role="button" aria-expanded="false" aria-controls="bankCollapseButton">
+        <div class="col-11 px-0">
+            <h6 class="text-white mb-0">Boleto</h6>
+        </div>
+        <div class="col-1">
+            <fa-icon [icon]="faSortDown" class="fa-lg text-white d-block text-right"></fa-icon>
+        </div>
+    </div>
+    <div class="row collapse align-items-center" id="bankCollapseButton">
+        <div class="col-9">
+            <div class="vertical-align-center bankNotification">
+                <div class="important-icon-wrapper">
+                    <fa-icon [icon]="faExclamation" class="fa-3x important-icon"></fa-icon>
+                </div>
+                <h5 class="mx-2 text-white font-weight-bold d-inline-block mb-0">
+                    O prazo para pagamento do seu boleto é de 3 dias.
+                </h5>
+            </div>
+        </div>
+        <div class="col-3 my-2">
+            <button type="button" class="retangle-button ml-auto" (click)="submitBank()">Ir para a confirmação</button>
+        </div>
+    </div>
+</section>

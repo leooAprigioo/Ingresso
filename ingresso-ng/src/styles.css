@@ -120,3 +120,8 @@ select {
     color: #FFF;
     padding: .2rem 1rem;
 }
+
+.vertical-align-center {
+    display: flex;
+    align-items: center;
+}

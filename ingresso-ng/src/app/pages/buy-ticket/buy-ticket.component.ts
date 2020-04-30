@@ -20,9 +20,9 @@ export class BuyTicketComponent implements OnInit {
 
   buildSteps() {
     // let typeStep = new Step(1, 'Tipo do ingresso', 'type', null, 'type');
-    let seatStep = new Step(1, 'Escolha o lugar', 'seat', null, 'type');
-    let paymentStep = new Step(2, 'Pagamento', 'type', null, 'type');
-    let confirmStep = new Step(3, 'Confirmação', 'type', null, 'type');
+    let seatStep = new Step(1, 'Escolha o lugar', 'seat', null, 'payment');
+    let paymentStep = new Step(2, 'Pagamento', 'payment', 'seat', 'confirm');
+    let confirmStep = new Step(3, 'Confirmação', 'confirm', 'payment', 'type');
 
     this.steps.push(seatStep);
     this.steps.push(paymentStep);
