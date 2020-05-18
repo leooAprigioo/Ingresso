@@ -47,6 +47,13 @@
                     <input type="password" placeholder="Confirmar Senha" name="password_confirm" class="form-control rounded-0" />
                 </div>
             </div>
+            <div class="w-100"></div>
+            <div class="col-8">
+                <re-captcha
+                    formControlName="recaptcha"
+                    [siteKey]="SITE_KEY">  
+                </re-captcha>
+            </div>
         </section>
         <section class="row justify-content-center py-3">
             <div class="col-12 col-md-8">

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Pedido } from 'src/app/models/pedido';
+import { Sessao } from 'src/app/models/sessao';
+import { PedidoService } from 'src/app/services/pedido/pedido.service';
 
 @Component({
   selector: 'app-confirm-order',
@@ -7,10 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmOrderComponent implements OnInit {
 
-  constructor() { }
+  public order: Pedido;
+
+  constructor(
+    private orderService: PedidoService
+  ) { }
 
   ngOnInit() {
-    console.log(history.state)
+    if (history.state.data) {
+      this.order = history.state.data;
+    }
+  }
+
+  getSession(): Sessao {
+    return this.order.ingressos[0].sessao;
+  }
+
+  confirm() {
+    this.orderService.newOrder(this.order).subscribe(data => {
+    })
   }
 
 }

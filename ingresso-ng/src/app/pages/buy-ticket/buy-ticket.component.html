@@ -1,8 +1,49 @@
-<main class="container-fluid">
+<main class="container-fluid my-2">
     <section class="row">
-        <div class="col-3"></div>
+        <div class="col-3">
+            <div class="row mx-2 mt-2 bg-35363A text-white wrapper" *ngIf="session">
+                <div class="col-12 my-2">
+                    <div class="poster">
+                        <img [src]="'http://image.tmdb.org/t/p/original' + session.filme_id.poster">
+                    </div>
+                </div>
+                <div class="col-12 mt-1">
+                    <h6 class="font-weight-bold">{{ session.filme_id.titulo }}</h6>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="vertical-align-center">
+                        <img src="assets/icons/pin-red.svg" width="30" height="26" class="pr-2" />
+                        <p class="mb-0">{{ session.sala_id.nome }}</p>
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="vertical-align-center">
+                        <img src="assets/icons/calendar-red.svg" width="30" height="26" class="pr-2" />
+                        <p class="mb-0">{{ session.data_horario_inicio.toLocaleDateString('pt-BR', {weekday: 'long', day: 'numeric', month: 'numeric'}) | titlecase}}</p>
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="vertical-align-center">
+                        <img src="assets/icons/clock-red.svg" width="30" height="26" class="pr-2" />
+                        <p class="mb-0">{{ session.data_horario_inicio.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'}) }}</p>
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="vertical-align-center">
+                        <img src="assets/icons/speak-red.svg" width="30" height="26" class="pr-2" />
+                        <p class="mb-0">{{ session.dublado ? 'Dublado' : 'Legendado' }}</p>
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="vertical-align-center">
+                        <img src="assets/icons/popcorn-red.svg" width="30" height="26" class="pr-2" />
+                        <p class="mb-0">{{ session.formato }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-9">
-            <app-stepper [steps]="steps" [data]="ticket"></app-stepper>            
+            <app-stepper [steps]="steps" [data]="order"></app-stepper>            
         </div>
     </section>
 </main>

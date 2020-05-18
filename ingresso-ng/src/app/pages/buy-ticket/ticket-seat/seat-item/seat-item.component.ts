@@ -25,7 +25,6 @@ export class SeatItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.position)
   }
 
   openModal() {
@@ -52,9 +51,6 @@ export class SeatItemComponent implements OnInit {
     }
 
     this.onSelect.emit(data);
-    console.log(this.selectedSeat)
-    console.log(this.position);
-    console.log(this.selectedType)
   }
 
   buildTicket(): Ingresso {

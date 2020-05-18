@@ -21,13 +21,12 @@ export class ListMovieComponent implements OnInit {
 
   ngOnInit() {
     this.filmeService.list().subscribe(
-      (data: Filme[]) => {this.filmes = data; console.log(this.filmes)}
+      (data: Filme[]) => {this.filmes = data;}
     )
   }
 
   delete(id: number) {
     this.filmeService.delete(id).subscribe(data => {
-      console.log(data);
     })
   }
 

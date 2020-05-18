@@ -1,1 +1,64 @@
-<p>confirm-order works!</p>
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <h5 class="mb-0 text-white">Confirmação do pedido</h5>
+        </div>
+    </div>
+    <div class="row text-white">
+        <div class="col-8">
+            <h6 class="font-weight-bold text-b3414b">Dados do filme</h6>
+            <div class="row">
+                <div class="col-4">
+                    <div class="poster">
+                        <img [src]="'http://image.tmdb.org/t/p/original' + getSession().filme_id.poster" alt="">
+                    </div>
+                </div>
+                <div class="col-8 divider">
+                    <div class="row">
+                        <div class="col-12">
+                            <h6 class="font-weight-bold">{{ getSession().filme_id.titulo }}</h6>
+                            <p class="mb-0 d-inline-block">{{ getSession().dublado ? 'Dublado' : 'Legendado' }}</p>
+                            <p class="mb-0 d-inline-block ml-4">{{ getSession().formato == '3D' ? getSession().formato : '' }}</p>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <p class="mb-0">Assentos</p>
+                            <span class="seat mx-2" *ngFor="let ticket of order.ingressos">{{ ticket.poltrona }}</span>
+                        </div>
+                        <div class="col-4 mt-4">
+                            <p class="mb-0 text-center font-weight-bold text-b3414b">Data</p>
+                            <p class="mb-0 text-center">{{ getSession().data_horario_inicio.toLocaleDateString('pt-BR', {weekday: 'long', day: 'numeric', month: 'numeric'}) | titlecase}}</p>
+                        </div>
+                        <div class="col-4 mt-4">
+                            <p class="mb-0 text-center font-weight-bold text-b3414b">Horário</p>
+                            <p class="mb-0 text-center">{{ getSession().data_horario_inicio.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'}) }}</p>
+                        </div>
+                        <div class="col-4 mt-4">
+                            <p class="mb-0 text-center font-weight-bold text-b3414b">Sala</p>
+                            <p class="mb-0 text-center">{{ getSession().sala_id.nome }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    <h6 class="font-weight-bold text-b3414b">Pagamento</h6>
+                    <p class="mb-0">Forma de pagamento: {{ order.dadosPagamento.tipoPagamento.nome}}</p>
+                </div>
+                <div class="col-12 mt-3" *ngIf="order.dadosPagamento.tipoPagamento.nome !== 'Boleto'">
+                    <p class="mb-0">Final cartão: ************{{ order.dadosPagamento.finalCartao }}</p>
+                    <p class="mb-0">Parcelas: {{ order.dadosPagamento.parcelas }}x</p>
+                </div>
+                <div class="col-12">
+                    <h6 class="font-weight-bold">Total a pagar: {{ order.totalPagamento | currency:'R$' }}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4 align-items-center">
+        <div class="col-4 offset-8">
+            <button type="button" class="retangle-button ml-auto" (click)="confirm()">Concluir compra</button>
+        </div>
+    </div>
+</section>

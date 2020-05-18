@@ -44,14 +44,36 @@ export class SessaoService {
       .pipe(
         take(1),
         map((data: Sessao) => {
-          console.log(data)
-
           let session = new Sessao();
           
           session.id = data[0].id;
-          session.sala_id = new Sala(data[0].sala_id);
-          session.filme_id = new Filme(data[0].filme_id);
-          session.data_horario_inicio = data[0].data_horario_inicio;
+          session.sala_id = new Sala(
+            data[0].sala.id,
+            data[0].sala.nome,
+            data[0].sala.quantidade_fileira,
+            data[0].sala.quantidade_assento,
+            data[0].sala.tipo_sala
+          );
+          session.filme_id = new Filme(
+            data[0].filme.id, 
+            data[0].filme.titulo,
+            new Date(data[0].filme.data_lancamento),
+            data[0].filme.ano,
+            data[0].filme.duracao,
+            data[0].filme.genero,
+            data[0].filme.diretor,
+            data[0].filme.atores,
+            data[0].filme.sinopse,
+            data[0].filme.classificacao,
+            data[0].filme.idioma,
+            data[0].filme.pais,
+            data[0].filme.imdb,
+            data[0].filme.poster,
+            data[0].filme.banner,
+            data[0].filme.trailer_url,
+            data[0].filme.em_cartaz
+          );
+          session.data_horario_inicio = new Date(data[0].data_horario_inicio);
           session.formato = data[0].formato;
           session.dublado = data[0].dublado;
 
@@ -64,12 +86,47 @@ export class SessaoService {
     return this.httpClient.get(`${api.path()}/sessao/porFilme/${filme.id}`)
       .pipe(
         take(1),
-        map((data: Sessao[]) => {
-          console.log(data)
+        map((data: any[]) => {
           return data.map(sessao => {
             return new Sessao(
               sessao.id,
-              sessao.sala_id,
+              new Sala(sessao.sala.id, sessao.sala.nome, sessao.sala.quantidade_fileira, sessao.sala.quantidade_assento, sessao.sala.tipo_sala),
+              sessao.filme_id = new Filme(
+                data[0].filme.id, 
+                data[0].filme.titulo,
+                new Date(data[0].filme.data_lancamento),
+                data[0].filme.ano,
+                data[0].filme.duracao,
+                data[0].filme.genero,
+                data[0].filme.diretor,
+                data[0].filme.atores,
+                data[0].filme.sinopse,
+                data[0].filme.classificacao,
+                data[0].filme.idioma,
+                data[0].filme.pais,
+                data[0].filme.imdb,
+                data[0].filme.poster,
+                data[0].filme.banner,
+                data[0].filme.trailer_url,
+                data[0].filme.em_cartaz
+              ),
+              new Date(sessao.data_horario_inicio),
+              sessao.formato,
+              sessao.dublado
+            );
+        })
+      }))
+  }
+
+  getDatesByMovie(filme: Filme): Observable<Sessao[]> {
+    return this.httpClient.get(`${api.path()}/sessao/obterDatasPorFilme/${filme.id}`)
+      .pipe(
+        take(1),
+        map((data: any[]) => {
+          return data.map(sessao => {
+            return new Sessao(
+              sessao.id,
+              new Sala(sessao.sala_id),
               sessao.filme_id,
               new Date(sessao.data_horario_inicio),
               sessao.formato,
@@ -84,13 +141,11 @@ export class SessaoService {
       .pipe(
         take(1),
         map((data: any[]) => {
-          console.log(data)
           return data.map(item => item.poltrona)
       }));
   }
 
   post(params: Sessao) {
-    console.log(params);
     return this.httpClient.post(`${api.path()}/sessao/criar`, JSON.stringify(params), {headers: this.httpHeader});
   }
 

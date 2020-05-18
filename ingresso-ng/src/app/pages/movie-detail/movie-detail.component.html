@@ -69,5 +69,5 @@
             </div>
         </div>
     </section> 
-    <app-movie-session [sessions]="sessions"></app-movie-session>
+    <app-movie-session [sessions]="sessions" [movie]="movie" *ngIf="movie && sessions"></app-movie-session>
 </main>

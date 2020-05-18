@@ -1,4 +1,4 @@
-<app-movie-date-carousel (onSelected)="changeMovieSessions($event)" [sessions]="sessions"></app-movie-date-carousel>
+<app-movie-date-carousel (onSelected)="changeMovieSessions($event)" [movie]="movie"></app-movie-date-carousel>
 <section class="row mx-2">
     <div class="col-12 py-4">
         <app-movie-session-filter (onFiltered)="filterSessions($event)"></app-movie-session-filter>

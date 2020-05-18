@@ -22,7 +22,6 @@ export class MovieSessionFilterComponent implements OnInit {
   }
 
   emitFilter() {
-    console.log(this.sessionMovieFilter);
     this.onFiltered.emit(this.sessionMovieFilter);
   }
 

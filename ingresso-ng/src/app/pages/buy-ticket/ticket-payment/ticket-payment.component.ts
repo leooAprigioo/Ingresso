@@ -23,6 +23,7 @@ export class TicketPaymentComponent implements OnInit {
   public debitCardForm: FormGroup;
 
   public tickets: Ingresso[];
+  public order: Pedido
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,7 +36,8 @@ export class TicketPaymentComponent implements OnInit {
     this.buildDebitCardForm();
 
     if (history.state.data) {
-      this.tickets = history.state.data;
+      this.order = history.state.data;
+      this.tickets = this.order.ingressos;
     }
 
   }
@@ -62,30 +64,28 @@ export class TicketPaymentComponent implements OnInit {
   }
 
   submitCreditCard() {
-    console.log(this.creditCardForm)
     if (!this.creditCardForm.valid) {
       return false;
     }
 
-    let order = this.buildOrder('credit', this.creditCardForm);
-    this.confirmPayment(order)
+    this.buildOrder('credit', this.creditCardForm);
+    this.confirmPayment();
 
   }
 
   submitDebitCard() {
-    console.log(this.debitCardForm)
     if (!this.debitCardForm.valid) {
       return false;
     }
 
-    let order = this.buildOrder('debit', this.debitCardForm);
-    this.confirmPayment(order)
+    this.buildOrder('debit', this.debitCardForm);
+    this.confirmPayment();
 
   }
 
   submitBank() {
-    let order = this.buildOrder('bank');
-    this.confirmPayment(order)
+    this.buildOrder('bank');
+    this.confirmPayment();
   }
 
   getTotalPrice() {
@@ -97,39 +97,31 @@ export class TicketPaymentComponent implements OnInit {
     return total;
   }
 
-  confirmPayment(order: Pedido) {
-    this.router.navigate(['../confirm'], {state: {data: order}, relativeTo: this.activatedRoute})
+  confirmPayment() {
+    this.router.navigate(['../confirm'], {state: {data: this.order}, relativeTo: this.activatedRoute})
   }
 
   private getLastFourNumbersFromCard(value: string) {
-    return parseInt(value.substr(11), 10);
+    return parseInt(value.substr(14).replace(/[.]/g, ''), 10);
   }
 
   private buildOrder(paymentType: string, form?: FormGroup) {
-    let order = new Pedido();
-
-    order.ingressos = this.tickets;
-    order.dataPedido = new Date();
-    order.totalPagamento = this.getTotalPrice();
-    console.log(form)
     switch (paymentType) {
       case 'credit':
-        order.dadosPagamento.finalCartao = this.getLastFourNumbersFromCard(form.controls.number.value)
-        order.dadosPagamento.nomePagador = form.controls.name.value;
-        order.dadosPagamento.parcelas = form.controls.parcel.value;
-        order.dadosPagamento.tipoPagamento = new TipoPagamento(1, 'Crédito')
+        this.order.dadosPagamento.finalCartao = this.getLastFourNumbersFromCard(form.controls.number.value)
+        this.order.dadosPagamento.nomePagador = form.controls.name.value;
+        this.order.dadosPagamento.parcelas = form.controls.parcel.value;
+        this.order.dadosPagamento.tipoPagamento = new TipoPagamento(1, 'Crédito')
         break;
       case 'debit':
-        order.dadosPagamento.finalCartao = this.getLastFourNumbersFromCard(form.controls.number.value)
-        order.dadosPagamento.nomePagador = form.controls.name.value;
-        order.dadosPagamento.parcelas = 1;
-        order.dadosPagamento.tipoPagamento = new TipoPagamento(2, 'Débito');
+        this.order.dadosPagamento.finalCartao = this.getLastFourNumbersFromCard(form.controls.number.value)
+        this.order.dadosPagamento.nomePagador = form.controls.name.value;
+        this.order.dadosPagamento.parcelas = 1;
+        this.order.dadosPagamento.tipoPagamento = new TipoPagamento(2, 'Débito');
         break;
       case 'bank':
-        order.dadosPagamento.tipoPagamento = new TipoPagamento(3, 'Boleto');   
+        this.order.dadosPagamento.tipoPagamento = new TipoPagamento(3, 'Boleto');   
     }
-
-    return order;
     
   }
 

@@ -20,7 +20,7 @@ export class CreateMovieRoomComponent implements OnInit {
 
   create(sala: Sala) {
     this.salaService.post(sala).subscribe((data) =>
-      console.log(data)
+      false
     );  this.router.navigate(['/'])
   }
 

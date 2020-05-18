@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild, ElementRef, Input, EventEmitter, Output }
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Sessao } from 'src/app/models/sessao';
 import { Session } from 'protractor';
+import { Filme } from 'src/app/models/filme';
+import { SessaoService } from 'src/app/services/sessao/sessao.service';
 
 @Component({
   selector: 'app-movie-date-carousel',
@@ -11,7 +13,8 @@ import { Session } from 'protractor';
 })
 export class MovieDateCarouselComponent implements OnInit {
 
-  @Input() sessions: Sessao[]
+  @Input() movie: Filme;
+  public sessions: Sessao[] = []
 
   faChevronRight = faChevronRight;
   moved: number = 0;
@@ -25,11 +28,20 @@ export class MovieDateCarouselComponent implements OnInit {
 
   public activated: boolean[] = []
 
-  constructor() { }
+  constructor(
+    private sessionService: SessaoService
+  ) { }
 
   ngOnInit() { 
-    this.buildActivatedItems();
-    this.initFirstDate();
+      this.loadSessionDates();
+  }
+
+  loadSessionDates() {
+    this.sessionService.getDatesByMovie(this.movie).subscribe(sessions => {
+      this.sessions = sessions;
+      this.buildActivatedItems();
+      this.initFirstDate();
+    })
   }
 
   buildActivatedItems() {
@@ -66,7 +78,6 @@ export class MovieDateCarouselComponent implements OnInit {
   }
 
   selectDate(sessionDate: Date, activated: number) {
-    console.log(sessionDate)
     this.setActivatedSessionDate(activated);
     this.onSelected.emit(sessionDate);
   }
@@ -88,6 +99,14 @@ export class MovieDateCarouselComponent implements OnInit {
 
   getShortDate(session: Sessao) {
       return session.data_horario_inicio.toLocaleDateString([], {day: '2-digit', month: '2-digit'})
+  }
+
+  getDistinctDates() {
+    let dates = [];
+    this.sessions.forEach(session => {
+
+    });
+    return dates;
   }
 
   getWeekDay(session: Sessao) {

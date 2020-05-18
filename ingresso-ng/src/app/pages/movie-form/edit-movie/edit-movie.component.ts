@@ -29,7 +29,7 @@ export class EditMovieComponent implements OnInit {
   }
 
   edit(filme: Filme) {
-    console.log(filme);
+
     this.filmeService.put(filme).subscribe((data: any) => {
      
     })

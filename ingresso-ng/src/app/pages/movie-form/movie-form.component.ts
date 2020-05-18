@@ -24,15 +24,12 @@ export class MovieFormComponent implements OnInit {
     this.initializeForm();
     if (this.filmeId) {
       this.filmeService.get(this.filmeId).subscribe((data:Filme) => {
-        console.log(data);
         this.populateForm(data);
       })
     } 
-    console.log(this.formGroup);
   }
 
   onSubmit() {
-    console.log(this.formGroup.value as Filme);
     this.submitForm.emit(this.formGroup.value as Filme);
   }
 
@@ -78,7 +75,6 @@ export class MovieFormComponent implements OnInit {
       // banner : filme.banner,
       trailer_url: filme.trailer_url
     });
-    console.log(this.formGroup);
   }
 
 }

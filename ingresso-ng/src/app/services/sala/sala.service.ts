@@ -53,7 +53,6 @@ export class SalaService {
   }
 
   post(params: Sala) {
-    console.log(params);
     return this.httpClient.post(`${api.path()}/sala/criar`, JSON.stringify(params), {headers: this.httpHeader});
   }
 

@@ -10,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Sessao } from 'src/app/models/sessao';
 import { iSelectedSeat } from 'src/app/interfaces/iSelectedSeat';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Pedido } from 'src/app/models/pedido';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 (window as any).Popper = Popper;
 declare var $: any;
@@ -44,20 +46,22 @@ export class TicketSeatComponent implements OnInit {
   public ticketTypes: Tipo_Ingresso[] = [];
   public session: Sessao;
   public unavailableSeats: string[] = [];
+  public order: Pedido;
 
   constructor(
     private salaService: SalaService,
     private ticketTypeService: TipoIngressoService,
     private sessionService: SessaoService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
 
     if (history.state.data) {
-      this.tickets = history.state.data;
-      console.log(history.state)
+      this.order = history.state.data;
+      this.tickets = this.order.ingressos;
     }
 
     this.loadTicketType()
@@ -71,7 +75,6 @@ export class TicketSeatComponent implements OnInit {
   loadSession(id: number) {
     this.sessionService.get(id).subscribe(data => {
       this.session = data;
-      console.log(this.session)
       this.loadRoom();
       this.loadUnavailableSeat();
     })
@@ -80,7 +83,6 @@ export class TicketSeatComponent implements OnInit {
   loadRoom() {
     this.salaService.get(this.session.sala_id.id).subscribe(data => {
       this.room = data;
-      console.log(this.room)
     });
   }
 
@@ -93,13 +95,11 @@ export class TicketSeatComponent implements OnInit {
   loadUnavailableSeat() {
     this.sessionService.getUnavailableSeat(this.session).subscribe(data => {
       this.unavailableSeats = data;
-      console.log(this.unavailableSeats)
     })
   }
   
   onSelectSeat(selectedSeat: iSelectedSeat) {
     selectedSeat.selected ? this.addTicket(selectedSeat) : this.removeTicket(selectedSeat);
-    console.log(this.tickets);
   }
 
   removeTicket(selectedSeat: iSelectedSeat) {
@@ -143,7 +143,7 @@ export class TicketSeatComponent implements OnInit {
   onSubmit() {
     this.buildTickets();
 
-    this.router.navigate(['../payment'], {state: {data: this.tickets}, relativeTo: this.activatedRoute})
+    this.router.navigate(['../payment'], {state: {data: this.order}, relativeTo: this.activatedRoute})
   }
 
   buildTickets() {
@@ -151,6 +151,15 @@ export class TicketSeatComponent implements OnInit {
       ticket.sessao = this.session;
       return ticket;
     });
-    console.log(this.tickets)
+
+    let order = new Pedido();
+
+    order.ingressos = this.tickets;
+    order.usuario = this.authenticationService.getCurrentUser();
+    order.dataPedido = new Date();
+    order.totalPagamento = this.getTotalPrice();
+    console.log(order);
+
+    this.order = order;
   }
 }

@@ -13,8 +13,8 @@ export class Sala {
     ) {
         this.id = id;
         this.nome = nome;
-        this.quantidade_fileira = quantidade_assento;
-        this.quantidade_assento = quantidade_fileira;
+        this.quantidade_fileira = quantidade_fileira;
+        this.quantidade_assento =  quantidade_assento;
         this.tipo_sala= tipo_sala;
     }
 

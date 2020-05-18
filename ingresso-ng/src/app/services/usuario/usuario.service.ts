@@ -58,7 +58,6 @@ export class UsuarioService {
   }
 
   post(params: Usuario) {
-    console.log(params);
     return this.httpClient.post(`${api.path()}/usuario/criar`, JSON.stringify(params), {headers: this.httpHeader});
   }
 

@@ -40,6 +40,16 @@ export class AuthenticationService {
     );
   }
 
+  getCurrentUser() {
+    let user = JSON.parse(localStorage.getItem('usuario'));
+    return JSON.parse(user);
+  }
+
+  logout() {
+    this.localStorageService.deleteItem('usuario');
+    this.loginEmitter$.next(false);
+  }
+
   private buildUsuario(payload: any) {
     let usuario = new Usuario(
       payload[0].id,
@@ -51,13 +61,12 @@ export class AuthenticationService {
       payload[0].endereco,
       payload[0].admin
     );
-    console.log(usuario);
-
     return usuario;
   }
 
   private loggingUser(data) {
     if (data) {
+      console.log(data)
       this.localStorageService.setItem('usuario', JSON.stringify(data));
       return true;
     } else {

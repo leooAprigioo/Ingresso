@@ -79,12 +79,10 @@ export class FilmeService {
   }
 
   post(params: Filme) {
-    console.log(params);
     return this.httpClient.post(`${api.path()}/filme/criar`, JSON.stringify(params), {headers: this.httpHeader});
   }
 
   put(params: Filme) {
-    console.log(params);
     return this.httpClient.put(`${api.path()}/filme/update/${params.id}`, JSON.stringify(params), {headers: this.httpHeader});
   }
 

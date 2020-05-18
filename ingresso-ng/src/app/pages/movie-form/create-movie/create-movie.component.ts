@@ -18,7 +18,7 @@ export class CreateMovieComponent implements OnInit {
 
   create(filme: Filme) {
     this.filmeService.post(filme).subscribe((data) =>
-      console.log(data)
+      false
     );
   }
 

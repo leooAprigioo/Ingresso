@@ -24,7 +24,7 @@ export class EditMovieRoomComponent implements OnInit {
 
   ngOnInit() {
     this.salaSerive.list().subscribe(
-      (data: Sala[]) => {this.sala = data; console.log(this.sala)}
+      (data: Sala[]) => {this.sala = data;}
     )
   }
 

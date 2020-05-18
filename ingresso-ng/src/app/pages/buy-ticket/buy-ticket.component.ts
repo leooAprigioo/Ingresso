@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Step } from 'src/app/models/step';
-import { Ingresso } from 'src/app/models/ingresso';
-
+import { Pedido } from 'src/app/models/pedido';
+import { Sessao } from 'src/app/models/sessao';
+import { SessaoService } from 'src/app/services/sessao/sessao.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-buy-ticket',
   templateUrl: './buy-ticket.component.html',
@@ -10,12 +12,22 @@ import { Ingresso } from 'src/app/models/ingresso';
 export class BuyTicketComponent implements OnInit {
 
   public steps: Step[] = [];
-  public ticket: Ingresso[] = [];
+  public order: Pedido;
+  public session: Sessao;
 
-  constructor() { }
+  constructor(
+    private sessionService: SessaoService,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.order = new Pedido();
+    this.order.ingressos = [];
     this.buildSteps();
+
+    this.activatedRoute.params.subscribe(param => {
+      this.loadSession(param['sessionId']);
+    })
   }
 
   buildSteps() {
@@ -28,6 +40,12 @@ export class BuyTicketComponent implements OnInit {
     this.steps.push(paymentStep);
     this.steps.push(confirmStep);
     // this.steps.push(typeStep);
+  }
+
+  loadSession(id: number) {
+    this.sessionService.get(id).subscribe(data => {
+      this.session = data;
+    })
   }
 
 }

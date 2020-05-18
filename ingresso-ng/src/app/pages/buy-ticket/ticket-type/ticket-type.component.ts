@@ -30,7 +30,6 @@ export class TicketTypeComponent implements OnInit {
     if (history.state.data) {
       this.ticket = history.state.data;
       this.buildTickets();
-      console.log(history.state)
     }
 
     this.loadTicketType();
@@ -44,7 +43,6 @@ export class TicketTypeComponent implements OnInit {
   loadSession(id: number) {
     this.sessaoService.get(id).subscribe(data => {
       this.session = data;
-      console.log(this.session)
     })
   }
 

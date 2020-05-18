@@ -38,11 +38,9 @@ export class LoginComponent implements OnInit {
       { label: 'E-mail ou senha inválidos', status: false, receiveMessage: 'usuario não encontrado', statusCode:400 },
       { label: 'Erro de servidor. Contate o administrador da plataforma', status: false, receiveMessage: '', statusCode:500 }
     ]
-    console.log(this.formGroup);
   }
 
   submit() {
-    console.log(this.formGroup.controls.password.errors);
     this.submitted = true;
     if (!this.formGroup.valid) {
       return false;
@@ -51,7 +49,6 @@ export class LoginComponent implements OnInit {
     const email = this.formGroup.controls.email.value;
     const password = this.formGroup.controls.password.value;
 
-    console.log(email, password);
     this.authenticationService.auth(email, password).subscribe(
       (data: boolean) => {
         this.router.navigate(['/'])
@@ -67,7 +64,7 @@ export class LoginComponent implements OnInit {
   }
 
   verifyResponseErrors (errorValue:HttpErrorResponse) {
-    this.errorLabel = this.errorLabel.map((value) => { value.receiveMessage === errorValue.error.Mensagem ? value.status = true : value.status = false; console.log(this.errorLabel); return value })
+    this.errorLabel = this.errorLabel.map((value) => { value.receiveMessage === errorValue.error.Mensagem ? value.status = true : value.status = false; return value })
   }
 
 }

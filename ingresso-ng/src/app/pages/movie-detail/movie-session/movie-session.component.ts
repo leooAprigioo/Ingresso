@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnChanges, Input } from '@ang
 import { Sessao } from 'src/app/models/sessao';
 import { iSessionRoom } from 'src/app/interfaces/iSessionRoom';
 import { iSessionMovieFilter } from 'src/app/interfaces/iSessionMovieFilter';
+import { Filme } from 'src/app/models/filme';
 
 @Component({
   selector: 'app-movie-session',
@@ -12,6 +13,7 @@ import { iSessionMovieFilter } from 'src/app/interfaces/iSessionMovieFilter';
 export class MovieSessionComponent implements OnInit {
 
   @Input() sessions: Sessao[];
+  @Input() movie: Filme;
   public sessionsByDate: iSessionRoom[];
   public filter: iSessionMovieFilter = {is3d: false, is2d: false, isLeg: false, isDub: false};
 
@@ -19,33 +21,9 @@ export class MovieSessionComponent implements OnInit {
 
   ngOnInit() {
     // this.loadSessions();
-    console.log(this.sessions)
   }
 
-  loadSessions() {
-    this.sessions = [
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-      Sessao.createMock(),
-    ];
-  }
+  loadSessions() { }
 
   filterSessionsByDate(date: Date) {
     return this.sessions.filter(session => session.data_horario_inicio.getDate() === date.getDate() && session.data_horario_inicio.getMonth() === date.getMonth());

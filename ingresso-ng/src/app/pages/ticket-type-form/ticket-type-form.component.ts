@@ -26,17 +26,14 @@ export class TicketTypeFormComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForm();
-    console.log(this.ingressoId)
     if (this.ingressoId) {
        this.ingressoService.get(this.ingressoId).subscribe((data:Tipo_Ingresso) => {
          this.populateForm(data);
        })
     } 
-    console.log(this.formGroup);
   }
 
   onSubmit() {
-    console.log(this.formGroup.value as Tipo_Ingresso);
     this.submitForm.emit(this.formGroup.value as Tipo_Ingresso);
   }
 
@@ -56,7 +53,6 @@ export class TicketTypeFormComponent implements OnInit {
   delete() {
     this.ingressoService.delete(this.ingressoId).subscribe(data => {
       window.location.reload(true);
-      console.log(data);
     })
   }
 
@@ -64,10 +60,6 @@ export class TicketTypeFormComponent implements OnInit {
     this.ingressoService.put(this.formGroup.value).subscribe(data => {
       this.ingressoId=null;
       window.location.reload(true);
-      
-    
-      
-      console.log(data);
     })
     
   }

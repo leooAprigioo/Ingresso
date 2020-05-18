@@ -43,7 +43,6 @@ export class MovieDetailComponent implements OnInit {
   }
 
   getTrailerUrl() {
-    console.log(this.movie);
     if (this.movie) {
       return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + this.movie.trailer_url) 
     }

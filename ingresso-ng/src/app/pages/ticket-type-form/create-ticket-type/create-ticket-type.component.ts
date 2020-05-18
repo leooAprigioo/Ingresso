@@ -17,7 +17,7 @@ export class CreateTicketTypeComponent implements OnInit {
   }
   create(ingresso: Tipo_Ingresso) {
     this.ingressoService.post(ingresso).subscribe((data) =>
-      console.log(data)
+      false
     
     );this.router.navigate(['/'])
     

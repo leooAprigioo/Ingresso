@@ -20,7 +20,7 @@ export class CreateSessionComponent implements OnInit {
 
   create(sessao: Sessao) {
     this.sessaoService.post(sessao).subscribe((data) =>
-      console.log(data)
+      false
     );  
     this.router.navigate(['/edit-session/1']);
     

@@ -36,24 +36,19 @@ export class SessionFormComponent implements OnInit {
     this.initializeForm();
     this.salaService.list().subscribe((data:Sala[]) => {
       this.salas = data;
-      console.log(data)
     });
 
     this.filmeService.list().subscribe((data: Filme[]) => this.filmes = data);
 
     if (this.sessaoId) {
-      console.log(this.sessaoId)
       this.sessaoService.get(this.sessaoId).subscribe((data: Sessao) => {
         this.sessao=data;
-        console.log(data);
         this.populateForm(data);
       })
     } 
-    console.log(this.salas);
   }
 
   onSubmit() {
-    console.log(this.formGroup.value as Sessao);
     this.submitForm.emit(this.formGroup.value as Sessao);
   }
 
@@ -75,14 +70,12 @@ export class SessionFormComponent implements OnInit {
   delete() {
     let sessaoString=this.sessaoId.toString()
     this.sessaoService.delete(this.sessaoId).subscribe(data => {
-      console.log(data);
       window.location.reload(true);
     })
   }
 
   update() {
     this.sessaoService.put(this.formGroup.value).subscribe(data => {
-      console.log(data);
       window.location.reload(true);
     })
   }

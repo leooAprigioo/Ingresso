@@ -9,7 +9,6 @@ export class LocalStorageService {
 
   getItem(key: string) {
     if (this.verifyItem(key)) {
-      console.log(JSON.parse(localStorage.getItem(key))["admin"]);
       return JSON.parse(localStorage.getItem(key));
     }
   }

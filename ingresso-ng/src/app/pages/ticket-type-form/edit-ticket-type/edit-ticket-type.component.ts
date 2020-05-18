@@ -25,7 +25,7 @@ export class EditTicketTypeComponent implements OnInit {
 
   ngOnInit() {
     this.ingressoservice.list().subscribe(
-      (data: Tipo_Ingresso[]) => {this.ingresso = data; console.log(this.ingresso)}
+      (data: Tipo_Ingresso[]) => {this.ingresso = data;}
     )
   }
 

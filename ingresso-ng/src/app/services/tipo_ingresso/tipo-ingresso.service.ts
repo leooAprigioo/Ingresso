@@ -52,7 +52,6 @@ export class TipoIngressoService {
   }
 
   post(params: Tipo_Ingresso) {
-    console.log(params);
     return this.httpClient.post(`${api.path()}/tipo_ingresso/criar`, JSON.stringify(params), {headers: this.httpHeader});
   }
 

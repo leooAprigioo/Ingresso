@@ -16,7 +16,7 @@ export class EditSessionComponent implements OnInit {
 
   ngOnInit() {
     this.sessaoSerivce.list().subscribe(
-      (data: Sessao[]) => {this.sessao = data; console.log(this.sessao)}
+      (data: Sessao[]) => {this.sessao = data;}
     )
   }
 

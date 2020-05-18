@@ -11,6 +11,8 @@ import { Usuario } from '../../models/usuario'
 })
 export class UserFormComponent implements OnInit {
 
+  public SITE_KEY:string = '6Ld03PgUAAAAAD6oIp7Lyry4-kmEdW12adUp9vRU';
+
   @Input() editMode: boolean;
   @Input() usuarioId : number;
   @Output() submitForm = new EventEmitter<Usuario>();
@@ -29,11 +31,9 @@ export class UserFormComponent implements OnInit {
         this.populateForm(data);
       })
     } 
-    console.log(this.formGroup);
   }
 
   onSubmit() {
-    console.log(this.formGroup.value as Usuario);
     this.submitForm.emit(this.formGroup.value as Usuario);
   }
 
@@ -46,7 +46,8 @@ export class UserFormComponent implements OnInit {
       email : ['', [Validators.required, Validators.email]],
       cpf : [''],
       endereco : [''],
-      admin : [false]
+      admin : [false],
+      recaptcha : ['', [Validators.required]]
     })
   }
 

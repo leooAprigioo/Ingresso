@@ -20,7 +20,6 @@ export class YoutubeVideoComponent implements OnInit {
   }
 
   getTrailerUrl() {
-    console.log(this.videoId);
     if (this.videoId) {
       return this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + this.videoId) 
     }

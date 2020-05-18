@@ -33,11 +33,9 @@ export class MovieRoomFormComponent implements OnInit {
         this.populateForm(data);
        })
     } 
-    console.log(this.formGroup);
   }
 
   onSubmit() {
-    console.log(this.formGroup.value as Sala);
     this.submitForm.emit(this.formGroup.value as Sala);
   }
 
@@ -56,15 +54,12 @@ export class MovieRoomFormComponent implements OnInit {
   }
   delete(id: number) {
     this.salaService.delete(this.sala.id).subscribe(data => {
-      console.log(data);
       window.location.reload(true);
     })
   }
 
   update() {
-    console.log(this.sala)
     this.salaService.put(this.formGroup.value).subscribe(data => {
-      console.log(data);
       window.location.reload(true);
     })
   }
