@@ -9,6 +9,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { iErrorLabel } from 'src/app/interfaces/iErrorLabel';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private localStorageService: LocalStorageService,
-    private router: Router
+    private router: Router,
+    private socialService: AuthService
   ) { }
 
   ngOnInit() {
@@ -37,7 +39,11 @@ export class LoginComponent implements OnInit {
     this.errorLabel = [
       { label: 'E-mail ou senha inválidos', status: false, receiveMessage: 'usuario não encontrado', statusCode:400 },
       { label: 'Erro de servidor. Contate o administrador da plataforma', status: false, receiveMessage: '', statusCode:500 }
-    ]
+    ];
+
+    this.socialService.authState.subscribe((user) => {
+      console.log(user);
+    })
   }
 
   submit() {
@@ -61,6 +67,10 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
+  }
+
+  loginWithGoogle() {
+    this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID)
   }
 
   verifyResponseErrors (errorValue:HttpErrorResponse) {

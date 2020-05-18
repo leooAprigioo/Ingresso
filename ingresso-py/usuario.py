@@ -4,7 +4,9 @@ from flask_api import status
 from infra.validar import validar_campos
 from contextlib import closing
 from infra.to_dict import rows_to_dict, row_to_dict ,to_dict_list
+import requests
 
+RECAPTCHA_KEY = '6Ld03PgUAAAAAMPwiZKJBu4_VfPxpFAyp113St_Y'
 usuario_db = []
 def conectar():
     return sqlite3.connect('ingresso_db.sqlt')
@@ -40,11 +42,15 @@ def localizar(id):
         return jsonify(lista)
   
 
-@usuario_app.route('/usuario/criar/', methods=['POST'])
+@usuario_app.route('/usuario/criar', methods=['POST'])
 def criar():
     dados = request.get_json()
-    print
+    if (not checkRecaptcha(dados['recaptcha'])):
+        return jsonify({'erro':'Recaptcha não aceito'}),422
+    
+
     with closing(conectar()) as con, closing(con.cursor()) as cur:
+        del dados['recaptcha']
         if not validar_campos(dados,campos,tipos):
             return jsonify({'erro':'valor(es) inválido(s)'}),422
         try:
@@ -97,6 +103,17 @@ def login(email,senha):
                     return jsonify({'Mensagem': 'usuario não encontrado'}),400
             except Exception as inst:
                 return jsonify({'Mensagem': inst.args}),500
+
+def checkRecaptcha(recaptchaToken):
+    body = {
+        'secret': RECAPTCHA_KEY,
+        'response': recaptchaToken
+    }
+
+    res = requests.post('https://www.google.com/recaptcha/api/siteverify', body)
+    recaptchaResults = res.json()
+    print(recaptchaResults)
+    return recaptchaResults['success']
     
 
 

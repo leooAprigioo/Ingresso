@@ -8,6 +8,8 @@ from telefone import telefone_app, telefone_db
 from sessao import sessao_app, sessao_db
 from tipo_ingresso import tipo_ingresso_app, tipo_ingresso_db
 from ingresso import ingresso_app, ingresso_db
+from pedido import pedido_app, pedido_db
+
 
 
 database = {
@@ -18,8 +20,7 @@ database = {
         "sessoa":sessao_db,
         "tipo_ingresso":tipo_ingresso_db,
         "ingresso":ingresso_db,
-            
-
+        "pedido":pedido_db,
 }
 
 app = Flask(__name__)
@@ -30,6 +31,7 @@ app.register_blueprint(telefone_app)
 app.register_blueprint(sessao_app)
 app.register_blueprint(tipo_ingresso_app)
 app.register_blueprint(ingresso_app)
+app.register_blueprint(pedido_app)
 CORS(app)
 
 def add_cors_headers(response):

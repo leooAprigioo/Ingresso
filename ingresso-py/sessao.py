@@ -36,12 +36,37 @@ def localizar(id):
         cur.execute("SELECT * FROM sessao  WHERE id = ?",(id,))
         con.commit()
         lista = rows_to_dict(cur.description, cur.fetchall())
+        for sessao in lista:
+            cur.execute("select * from sala where id = ?", (sessao['sala_id'],))
+            con.commit()
+            sessao['sala'] = rows_to_dict(cur.description, cur.fetchall())[0]
+        for sessao in lista:
+            cur.execute("select * from filme where id = ?", (sessao['filme_id'],))
+            con.commit()
+            sessao['filme'] = rows_to_dict(cur.description, cur.fetchall())[0]
         return jsonify(lista)
 
 @sessao_app.route('/sessao/porFilme/<int:id_filme>', methods=['GET'])
 def localizarPorFilme(id_filme):
     with closing(conectar()) as con, closing(con.cursor()) as cur:
         cur.execute("select * from sessao where filme_id = ? and data_horario_inicio >= current_timestamp order by data_horario_inicio asc",(id_filme,))
+        con.commit()
+        lista = rows_to_dict(cur.description, cur.fetchall())
+        for sessao in lista:
+            cur.execute("select * from sala where id = ?", (sessao['sala_id'],))
+            con.commit()
+            sessao['sala'] = rows_to_dict(cur.description, cur.fetchall())[0]
+        for sessao in lista:
+            cur.execute("select * from filme where id = ?", (sessao['filme_id'],))
+            con.commit()
+            sessao['filme'] = rows_to_dict(cur.description, cur.fetchall())[0]
+        print(lista[0])
+        return jsonify(lista)
+
+@sessao_app.route('/sessao/obterDatasPorFilme/<int:id_filme>', methods=['GET'])
+def obterDatasPorFilme(id_filme):
+    with closing(conectar()) as con, closing(con.cursor()) as cur:
+        cur.execute("select * from sessao where filme_id = ? and data_horario_inicio > current_timestamp group by date(data_horario_inicio);",(id_filme,))
         con.commit()
         lista = rows_to_dict(cur.description, cur.fetchall())
         return jsonify(lista)
