@@ -1,9 +1,20 @@
 import sqlite3
-from flask import Blueprint, jsonify, request
+
 from flask_api import status
 from infra.validar import validar_campos
 from contextlib import closing
 from infra.to_dict import rows_to_dict, row_to_dict ,to_dict_list
+from random import random
+from cieloApi.cieloApi3 import *
+from flask import Blueprint, jsonify, request
+import json
+
+environment = Environment(sandbox=True)
+# Configure seu merchant, para gerar acesse: https://cadastrosandbox.cieloecommerce.cielo.com.br/
+merchant = Merchant('aac3c3b7-2597-4ce6-9b48-e960194e20bc', 'MELEUYUQPESUWKXAOXRMDWJXWEEULYSYPIDQPFWB')
+# Crie uma instância de Sale informando o ID do pagamento
+sale = Sale(random())
+
 
 
 pedido_db = []
@@ -53,5 +64,47 @@ def criar():
     #             return jsonify({'Mensagem':'sucesso'}),200                
     #         except Exception as inst:
     #             return jsonify({'Mensagem': inst.args}),400
+    
+
+
+
+@pedido_app.route("/apiPagamento", methods=["PUT", "POST"])
+def form():
+    print('api',request)
+    requestF = request.get_json()
+    print('api',requestF)
+    numeroDoCartao = requestF["finalCartao"]
+    nomeDoComprador = requestF['nomePagador']
+    cvv = requestF['cvv']
+    parcelas = requestF['parcelas']
+    mes = requestF['mes']
+    ano = requestF['ano']
+    valor = requestF['valor']
+    
+    sale.customer = Customer(nomeDoComprador)
+    credit_card = CreditCard(cvv, 'Visa')
+    credit_card.expiration_date = mes+'/'+ano
+    credit_card.card_number = numeroDoCartao
+    credit_card.holder = nomeDoComprador
+    sale.payment = Payment(valor)
+    sale.payment.credit_card = credit_card
+    cielo_ecommerce = CieloEcommerce(merchant, environment)
+    response_create_sale = cielo_ecommerce.create_sale(sale)
+    print ('----------------------response_create_sale----------------------')
+    print (json.dumps(response_create_sale, indent=2))
+    print ('----------------------response_create_sale----------------------')
+    payment_id = sale.payment.payment_id
+
+    if(response_create_sale["Payment"]["ReturnCode"] == "4" or response_create_sale["Payment"]["ReturnCode"] == "6"):
+         return jsonify({'Mensagem': response_create_sale["Payment"]["ReturnMessage"]}),200
+    return jsonify({'Mensagem': response_create_sale["Payment"]["ReturnMessage"]}),200
+   
+
+
+
+
+
+
+
 
 

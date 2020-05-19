@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private localStorageService: LocalStorageService,
     private router: Router,
-    private socialService: AuthService
+    // private socialService: AuthService
   ) { }
 
   ngOnInit() {
@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
       { label: 'Erro de servidor. Contate o administrador da plataforma', status: false, receiveMessage: '', statusCode:500 }
     ];
 
-    this.socialService.authState.subscribe((user) => {
-      console.log(user);
-    })
+    // this.socialService.authState.subscribe((user) => {
+    //   console.log(user);
+    // })
   }
 
   submit() {
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle() {
-    this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID)
+    // this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID)
   }
 
   verifyResponseErrors (errorValue:HttpErrorResponse) {

@@ -37,6 +37,7 @@ export class TicketPaymentComponent implements OnInit {
 
     if (history.state.data) {
       this.order = history.state.data;
+      console.log(this.order);
       this.tickets = this.order.ingressos;
     }
 
@@ -46,7 +47,7 @@ export class TicketPaymentComponent implements OnInit {
     this.creditCardForm = this.formBuilder.group({
       name: ['', Validators.required],
       number: ['', [Validators.required, Validators.maxLength(19), Validators.minLength(16)]],
-      cvc: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(3)]],
+      cvv: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(3)]],
       parcel: ['1', Validators.required],
       month: ['', Validators.required],
       year: ['', Validators.required]
@@ -57,7 +58,7 @@ export class TicketPaymentComponent implements OnInit {
     this.debitCardForm = this.formBuilder.group({
       name: ['', Validators.required],
       number: ['', [Validators.required, Validators.maxLength(19), Validators.minLength(16)]],
-      cvc: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(3)]],
+      cvv: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(3)]],
       month: ['', Validators.required],
       year: ['', Validators.required]
     });
@@ -112,6 +113,9 @@ export class TicketPaymentComponent implements OnInit {
         this.order.dadosPagamento.nomePagador = form.controls.name.value;
         this.order.dadosPagamento.parcelas = form.controls.parcel.value;
         this.order.dadosPagamento.tipoPagamento = new TipoPagamento(1, 'Crédito')
+        this.order.dadosPagamento.cvv = form.controls.cvv.value;
+        this.order.dadosPagamento.mes = form.controls.month.value;
+        this.order.dadosPagamento.ano = form.controls.year.value;
         break;
       case 'debit':
         this.order.dadosPagamento.finalCartao = this.getLastFourNumbersFromCard(form.controls.number.value)

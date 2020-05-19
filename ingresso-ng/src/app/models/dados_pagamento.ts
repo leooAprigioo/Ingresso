@@ -5,6 +5,9 @@ export class DadosPagamento {
     public tipoPagamento: TipoPagamento;
     public nomePagador: string;
     public finalCartao: number;
+    public cvv: number;
+    public mes: number;
+    public ano: number;
     public parcelas: number;
     public vencimento: Date;
     public codigoBarras: string;
