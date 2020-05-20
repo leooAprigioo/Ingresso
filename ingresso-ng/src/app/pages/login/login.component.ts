@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private localStorageService: LocalStorageService,
     private router: Router,
-    // private socialService: AuthService
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -40,10 +40,6 @@ export class LoginComponent implements OnInit {
       { label: 'E-mail ou senha inválidos', status: false, receiveMessage: 'usuario não encontrado', statusCode:400 },
       { label: 'Erro de servidor. Contate o administrador da plataforma', status: false, receiveMessage: '', statusCode:500 }
     ];
-
-    // this.socialService.authState.subscribe((user) => {
-    //   console.log(user);
-    // })
   }
 
   submit() {
@@ -51,6 +47,10 @@ export class LoginComponent implements OnInit {
     if (!this.formGroup.valid) {
       return false;
     }
+
+    this.authService.authState.subscribe((user) => {
+      console.log(user)
+    });
 
     const email = this.formGroup.controls.email.value;
     const password = this.formGroup.controls.password.value;
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle() {
-    // this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID)
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
   verifyResponseErrors (errorValue:HttpErrorResponse) {
